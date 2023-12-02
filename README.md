@@ -68,6 +68,7 @@ The recommended report structure will have a format as follows:
 
 </details>
 
+<details>
 <summary>Nguyễn Đức Dũng</summary>
 <br>
 
@@ -82,6 +83,7 @@ The recommended report structure will have a format as follows:
 
 </details>
 
+<details>
 <summary>Nguyễn Tùng Dương</summary>
 <br>
 
