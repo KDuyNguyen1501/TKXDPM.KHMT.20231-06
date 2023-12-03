@@ -48,8 +48,7 @@ The recommended report structure will have a format as follows:
 - Implementation details:
   - Pull Request(s): [Attach links to your pull requests here. You can attach multiple pull requests]()
   - Specific implementation details:
-    - Describe specific in detail what you did last week
-    - You can attach images if you want
+    - comment level coupling của các class trong thư mục controller và thư mục entity.cart
 
 </details>
 

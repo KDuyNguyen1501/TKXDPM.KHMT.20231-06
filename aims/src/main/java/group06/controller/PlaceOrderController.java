@@ -31,6 +31,7 @@ public class PlaceOrderController extends BaseController{
      * This method checks the avalibility of product when user click PlaceOrder button
      * @throws SQLException
      */
+    // data coupling
     public void placeOrder() throws SQLException{
         Cart.getCart().checkAvailabilityOfProduct();
     }
@@ -40,6 +41,7 @@ public class PlaceOrderController extends BaseController{
      * @return Order
      * @throws SQLException
      */
+    // data coupling
     public Order createOrder() throws SQLException{
         Order order = new Order();
         for (Object object : Cart.getCart().getListMedia()) {
@@ -57,6 +59,7 @@ public class PlaceOrderController extends BaseController{
      * @param order
      * @return Invoice
      */
+    // data coupling
     public Invoice createInvoice(Order order) {
         return new Invoice(order);
     }
@@ -104,6 +107,7 @@ public class PlaceOrderController extends BaseController{
      * @param order
      * @return shippingFee
      */
+    // data coupling
     public int calculateShippingFee(Order order){
         Random rand = new Random();
         int fees = (int)( ( (rand.nextFloat()*10)/100 ) * order.getAmount() );
