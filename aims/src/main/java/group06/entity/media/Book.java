@@ -103,6 +103,7 @@ public class Book extends Media {
         return this;
     }
 
+    //Data Coupling
     @Override
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM "+
@@ -137,7 +138,8 @@ public class Book extends Media {
 			throw new SQLException();
 		}
     }
-
+    
+    // No coupling
     @Override
     public List getAllMedia() {
         return null;

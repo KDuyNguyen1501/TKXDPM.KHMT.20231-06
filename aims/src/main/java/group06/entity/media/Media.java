@@ -43,12 +43,14 @@ public class Media {
         //stm = AIMSDB.getConnection().createStatement();
     }
 
+    // Data Coupling
     public int getQuantity() throws SQLException{
         int updated_quantity = getMediaById(id).quantity;
         this.quantity = updated_quantity;
         return updated_quantity;
     }
 
+    // Data Coupling
     public Media getMediaById(int id) throws SQLException{
         String sql = "SELECT * FROM Media ;";
         Statement stm = AIMSDB.getConnection().createStatement();
@@ -67,6 +69,7 @@ public class Media {
         return null;
     }
 
+    // Data Coupling
     public List getAllMedia() throws SQLException{
         Statement stm = AIMSDB.getConnection().createStatement();
         ResultSet res = stm.executeQuery("select * from Media");
@@ -85,6 +88,7 @@ public class Media {
         return medium;
     }
 
+    // Data Coupling
     public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement();
         if (value instanceof String){
