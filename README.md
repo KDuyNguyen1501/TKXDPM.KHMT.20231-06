@@ -60,7 +60,7 @@ The recommended report structure will have a format as follows:
   - Comment level coupling cho entity
 
 - Implementation details:
-  - Pull Request(s): [Attach links to your pull requests here. You can attach multiple pull requests]()
+  - Pull Request(s): https://github.com/KDuyNguyen1501/TKXDPM.KHMT.20231-06/pull/4
   - Specific implementation details:
     - Describe specific in detail what you did last week
     - You can attach images if you want
