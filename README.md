@@ -43,10 +43,10 @@ The recommended report structure will have a format as follows:
 <br>
 
 - Assigned tasks:
-  - Comment level coupling cho HomeController với 3 controller còn lại
+  - Comment level coupling cho controller folder và entity.cart folder
 
 - Implementation details:
-  - Pull Request(s): [Attach links to your pull requests here. You can attach multiple pull requests]()
+  - Pull Request(s): [https://github.com/KDuyNguyen1501/TKXDPM.KHMT.20231-06/pull/1]()
   - Specific implementation details:
     - comment level coupling của các class trong thư mục controller và thư mục entity.cart
 
