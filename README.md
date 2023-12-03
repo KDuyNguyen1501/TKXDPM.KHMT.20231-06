@@ -75,7 +75,7 @@ The recommended report structure will have a format as follows:
   - Comment level coupling cho các class handler trong folder views
 
 - Implementation details:
-  - Pull Request(s): [https://github.com/KDuyNguyen1501/TKXDPM.KHMT.20231-06/pull/1]()
+  - Pull Request(s): [https://github.com/KDuyNguyen1501/TKXDPM.KHMT.20231-06/pull/5]()
   - Specific implementation details:
     - Describe specific in detail what you did last week
     - You can attach images if you want
