@@ -81,6 +81,7 @@ public class PaymentController extends BaseController {
 	 * @return {@link java.util.Map Map} represent the payment result with a
 	 *         message.
 	 */
+	// data coupling
 	public Map<String, String> payOrder(int amount, String contents, String cardNumber, String cardHolderName,
 			String expirationDate, String securityCode) {
 		Map<String, String> result = new Hashtable<String, String>();
@@ -99,7 +100,7 @@ public class PaymentController extends BaseController {
 		}
 		return result;
 	}
-
+	// data coupling
 	public void emptyCart(){
         Cart.getCart().emptyCart();
     }

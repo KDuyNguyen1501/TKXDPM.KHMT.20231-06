@@ -21,10 +21,11 @@ public class Cart {
         lstCartMedia = new ArrayList<>();
     }
 
+    // data coupling
     public void addCartMedia(CartMedia cm){
         lstCartMedia.add(cm);
     }
-
+    // data coupling
     public void removeCartMedia(CartMedia cm){
         lstCartMedia.remove(cm);
     }
@@ -36,7 +37,7 @@ public class Cart {
     public void emptyCart(){
         lstCartMedia.clear();
     }
-
+    // data coupling
     public int getTotalMedia(){
         int total = 0;
         for (Object obj : lstCartMedia) {
@@ -46,6 +47,7 @@ public class Cart {
         return total;
     }
 
+    // data coupling
     public int calSubtotal(){
         int total = 0;
         for (Object obj : lstCartMedia) {
@@ -55,6 +57,7 @@ public class Cart {
         return total;
     }
 
+    // data coupling
     public void checkAvailabilityOfProduct() throws SQLException{
         boolean allAvai = true;
         for (Object object : lstCartMedia) {
@@ -66,6 +69,7 @@ public class Cart {
         if (!allAvai) throw new MediaNotAvailableException("Some media not available");
     }
 
+    // stamp coupling
     public CartMedia checkMediaInCart(Media media){
         for (CartMedia cartMedia : lstCartMedia) {
             if (cartMedia.getMedia().getId() == media.getId()) return cartMedia;
