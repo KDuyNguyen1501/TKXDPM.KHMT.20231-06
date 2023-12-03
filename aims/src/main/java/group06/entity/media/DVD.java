@@ -101,6 +101,7 @@ public class DVD extends Media {
                 + releasedDate + "'" + ", filmType='" + filmType + "'" + "}";
     }
 
+    // data coupling
     @Override
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM "+
@@ -134,6 +135,7 @@ public class DVD extends Media {
         }
     }
 
+    // No coupling
     @Override
     public List getAllMedia() {
         return null;
