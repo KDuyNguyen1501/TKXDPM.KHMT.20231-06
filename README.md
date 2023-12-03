@@ -75,7 +75,7 @@ The recommended report structure will have a format as follows:
   - Comment level coupling cho PlaceOrderController với 3 controller còn lại
 
 - Implementation details:
-  - Pull Request(s): [Attach links to your pull requests here. You can attach multiple pull requests]()
+  - Pull Request(s): [https://github.com/KDuyNguyen1501/TKXDPM.KHMT.20231-06/pull/1]()
   - Specific implementation details:
     - Describe specific in detail what you did last week
     - You can attach images if you want
