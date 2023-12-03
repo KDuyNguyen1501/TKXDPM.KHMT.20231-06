@@ -72,7 +72,7 @@ The recommended report structure will have a format as follows:
 <br>
 
 - Assigned tasks:
-  - Comment level coupling cho PlaceOrderController với 3 controller còn lại
+  - Comment level coupling cho các class handler trong folder views
 
 - Implementation details:
   - Pull Request(s): [https://github.com/KDuyNguyen1501/TKXDPM.KHMT.20231-06/pull/1]()

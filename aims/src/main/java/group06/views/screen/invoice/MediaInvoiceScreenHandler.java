@@ -45,7 +45,7 @@ public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
     public MediaInvoiceScreenHandler(String screenPath) throws IOException{
         super(screenPath);
     }
-
+    //data coupling (sử dụng thông tin từ các lớp OrderMedia)
     public void setOrderMedia(OrderMedia orderMedia) throws SQLException{
         this.orderMedia = orderMedia;
         setMediaInfo();

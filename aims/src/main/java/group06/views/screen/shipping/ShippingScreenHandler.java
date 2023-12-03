@@ -45,7 +45,7 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
 	private ComboBox<String> province;
 
 	private Order order;
-
+    //data coupling (sử dụng thông tin từ lớp order)
 	public ShippingScreenHandler(Stage stage, String screenPath, Order order) throws IOException {
 		super(stage, screenPath);
 		this.order = order;

@@ -32,7 +32,7 @@ public class PaymentScreenHandler extends BaseScreenHandler {
 	public PaymentScreenHandler(Stage stage, String screenPath, int amount, String contents) throws IOException {
 		super(stage, screenPath);
 	}
-
+    //data coupling (sử dụng thông tin từ lớp Invoice)
 	public PaymentScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
 		super(stage, screenPath);
 		this.invoice = invoice;

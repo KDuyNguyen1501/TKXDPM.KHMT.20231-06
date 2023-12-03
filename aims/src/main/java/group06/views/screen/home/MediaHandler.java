@@ -44,7 +44,7 @@ public class MediaHandler extends FXMLScreenHandler{
     private static Logger LOGGER = Utils.getLogger(MediaHandler.class.getName());
     private Media media;
     private HomeScreenHandler home;
-
+    //data coupling (sử dụng thông tin từ các lớp Media, và HomeScreenHandler)
     public MediaHandler(String screenPath, Media media, HomeScreenHandler home) throws SQLException, IOException{
         super(screenPath);
         this.media = media;
