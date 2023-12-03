@@ -57,7 +57,7 @@ The recommended report structure will have a format as follows:
 <br>
 
 - Assigned tasks:
-  - Comment level coupling cho PaymentController với 3 controller còn lại
+  - Comment level coupling cho entity
 
 - Implementation details:
   - Pull Request(s): [Attach links to your pull requests here. You can attach multiple pull requests]()
