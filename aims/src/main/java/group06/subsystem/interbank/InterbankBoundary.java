@@ -5,6 +5,7 @@ import group06.utils.API;
 
 public class InterbankBoundary {
 
+	//Sequential cohesion do nhận output từ hàm InterbankSubsystemController.generateData
 	String query(String url, String data) {
 		String response = null;
 		try {
