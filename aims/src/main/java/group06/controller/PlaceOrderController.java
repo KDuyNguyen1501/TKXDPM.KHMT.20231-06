@@ -70,6 +70,7 @@ public class PlaceOrderController extends BaseController{
      * @throws InterruptedException
      * @throws IOException
      */
+    // Procedural cohesion
     public void processDeliveryInfo(HashMap info) throws InterruptedException, IOException{
         LOGGER.info("Process Delivery Info");
         LOGGER.info(info.toString());
@@ -86,16 +87,19 @@ public class PlaceOrderController extends BaseController{
     	
     }
     
+    // Procedural cohesion
     public boolean validatePhoneNumber(String phoneNumber) {
     	// TODO: your work
     	return false;
     }
     
+    // Procedural cohesion
     public boolean validateName(String name) {
     	// TODO: your work
     	return false;
     }
     
+    // Procedural cohesion
     public boolean validateAddress(String address) {
     	// TODO: your work
     	return false;
@@ -108,6 +112,7 @@ public class PlaceOrderController extends BaseController{
      * @return shippingFee
      */
     // data coupling
+    // Procedural cohesion
     public int calculateShippingFee(Order order){
         Random rand = new Random();
         int fees = (int)( ( (rand.nextFloat()*10)/100 ) * order.getAmount() );

@@ -82,6 +82,7 @@ public class PaymentController extends BaseController {
 	 *         message.
 	 */
 	// data coupling
+	// Sequential cohesion
 	public Map<String, String> payOrder(int amount, String contents, String cardNumber, String cardHolderName,
 			String expirationDate, String securityCode) {
 		Map<String, String> result = new Hashtable<String, String>();
@@ -101,6 +102,7 @@ public class PaymentController extends BaseController {
 		return result;
 	}
 	// data coupling
+	// Procedural cohesion
 	public void emptyCart(){
         Cart.getCart().emptyCart();
     }
