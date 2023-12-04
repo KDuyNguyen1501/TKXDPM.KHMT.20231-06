@@ -88,12 +88,12 @@ The recommended report structure will have a format as follows:
 
 - Assigned tasks:
   - Comment level coupling cho ViewCartController với 3 controller còn lại
+  - Comment level cohesion cho folder subsystem và utils
 
 - Implementation details:
-  - Pull Request(s): [Attach links to your pull requests here. You can attach multiple pull requests]()
+  - Pull Request(s): []()
   - Specific implementation details:
-    - Describe specific in detail what you did last week
-    - You can attach images if you want
+    - Comment level cohesion cho các hàm trong folder subsystem và utils
 
 </details>
 

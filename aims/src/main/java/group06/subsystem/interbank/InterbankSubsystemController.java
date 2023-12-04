@@ -25,14 +25,17 @@ public class InterbankSubsystemController {
 
 	private static InterbankBoundary interbankBoundary = new InterbankBoundary();
 
+	//Logical cohesion
 	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
 		return null;
 	}
 	
+	//Sequential cohesion do là output của hàm interbankBoundary.query
 	private String generateData(Map<String, Object> data) {
 		return ((MyMap) data).toJSON();
 	}
 
+	//Sequential cohesion do là output cho hàm payOrder
 	public PaymentTransaction payOrder(CreditCard card, int amount, String contents) {
 		Map<String, Object> transaction = new MyMap();
 
@@ -63,6 +66,7 @@ public class InterbankSubsystemController {
 		return makePaymentTransaction(response);
 	}
 
+	//Sequential cohesion do lấy input từ hàm payOrder
 	private PaymentTransaction makePaymentTransaction(MyMap response) {
 		if (response == null)
 			return null;

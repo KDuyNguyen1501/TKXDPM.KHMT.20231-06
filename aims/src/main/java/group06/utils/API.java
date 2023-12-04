@@ -25,6 +25,7 @@ public class API {
 	public static DateFormat DATE_FORMATER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	private static Logger LOGGER = Utils.getLogger(Utils.class.getName());
 
+	//Logical cohesion vì cùng là các thao tác về API
 	public static String get(String url, String token) throws Exception {
 		LOGGER.info("Request URL: " + url + "\n");
 		URL line_api_url = new URL(url);
@@ -46,7 +47,7 @@ public class API {
 	}
 
 	int var;
-
+	//Logical cohesion vì cùng là các thao tác về API
 	public static String post(String url, String data
 //			, String token
 	) throws IOException {
@@ -77,7 +78,7 @@ public class API {
 		LOGGER.info("Respone Info: " + response.toString());
 		return response.toString();
 	}
-
+	//Logical cohesion vì cùng là các thao tác về API
 	private static void allowMethods(String... methods) {
 		try {
 			Field methodsField = HttpURLConnection.class.getDeclaredField("methods");

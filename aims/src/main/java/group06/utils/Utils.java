@@ -37,6 +37,7 @@ public class Utils {
 	 * @author hieudm
 	 * @return the current time as {@link java.lang.String String}.
 	 */
+	
 	public static String getToday() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    Date date = new Date();
