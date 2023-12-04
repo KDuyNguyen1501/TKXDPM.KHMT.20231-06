@@ -36,7 +36,7 @@ The recommended structure is as follows:
 The recommended report structure will have a format as follows:
 
 <details>
-  <summary>W12: 27/11/2023~03/12/2023 </summary>
+  <summary>W09: 27/11/2023~03/12/2023 </summary>
 <br>
 <details>
 <summary>Nguyễn Khánh Duy</summary>
@@ -101,6 +101,71 @@ The recommended report structure will have a format as follows:
 
 ---
 
+<details>
+  <summary>W10: 04/12/2023~10/12/2023 </summary>
+<br>
+<details>
+<summary>Nguyễn Khánh Duy</summary>
+<br>
+
+- Assigned tasks:
+  - Comment level cohesion cho controller folder và entity.cart folder
+
+- Implementation details:
+  - Pull Request(s): [https://github.com/KDuyNguyen1501/TKXDPM.KHMT.20231-06/pull/7]()
+  - Specific implementation details:
+    - comment level cohesion của các class trong thư mục controller và thư mục entity.cart
+
+</details>
+
+<details>
+<summary>Nguyễn Bá Duy</summary>
+<br>
+
+- Assigned tasks:
+  - Comment level coupling cho entity
+
+- Implementation details:
+  - Pull Request(s): https://github.com/KDuyNguyen1501/TKXDPM.KHMT.20231-06/pull/4
+  - Specific implementation details:
+    - Describe specific in detail what you did last week
+    - You can attach images if you want
+
+</details>
+
+<details>
+<summary>Nguyễn Đức Dũng</summary>
+<br>
+
+- Assigned tasks:
+  - Comment level coupling cho các class handler trong folder views
+
+- Implementation details:
+  - Pull Request(s): [https://github.com/KDuyNguyen1501/TKXDPM.KHMT.20231-06/pull/5]()
+  - Specific implementation details:
+    - Describe specific in detail what you did last week
+    - You can attach images if you want
+
+</details>
+
+<details>
+<summary>Nguyễn Tùng Dương</summary>
+<br>
+
+- Assigned tasks:
+  - Comment level coupling cho ViewCartController với 3 controller còn lại
+
+- Implementation details:
+  - Pull Request(s): [Attach links to your pull requests here. You can attach multiple pull requests]()
+  - Specific implementation details:
+    - Describe specific in detail what you did last week
+    - You can attach images if you want
+
+</details>
+
+</details>
+
+---
 ## Pull request template
 
 - You are required to create a pull request according to these steps:

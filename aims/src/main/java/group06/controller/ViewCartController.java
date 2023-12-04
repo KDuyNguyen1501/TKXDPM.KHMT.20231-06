@@ -18,6 +18,7 @@ public class ViewCartController extends BaseController{
      * @throws SQLException
      */
     // data coupling
+    // 
     public void checkAvailabilityOfProduct() throws SQLException{
         Cart.getCart().checkAvailabilityOfProduct();
     }
@@ -27,6 +28,7 @@ public class ViewCartController extends BaseController{
      * @return subtotal
      */
     // data coupling
+    // 
     public int getCartSubtotal(){
         int subtotal = Cart.getCart().calSubtotal();
         return subtotal;

@@ -18,6 +18,7 @@ public class BaseController {
      * @return CartMedia or null
      */
     // data coupling
+    // Procedural cohesion
     public CartMedia checkMediaInCart(Media media){
         return Cart.getCart().checkMediaInCart(media);
     }
@@ -27,6 +28,7 @@ public class BaseController {
      * @return List[CartMedia]
      */
     // data coupling
+    // Procedural cohesion
     public List getListCartMedia(){
         return Cart.getCart().getListMedia();
     }

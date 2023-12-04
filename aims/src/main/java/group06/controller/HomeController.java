@@ -18,6 +18,7 @@ public class HomeController extends BaseController{
      * @throws SQLException
      */
     // data coupling
+    // Procedural cohesion
     public List getAllMedia() throws SQLException{
         return new Media().getAllMedia();
     }

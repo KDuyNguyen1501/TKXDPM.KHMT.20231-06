@@ -22,10 +22,12 @@ public class Cart {
     }
 
     // data coupling
+    // Procedural cohesion
     public void addCartMedia(CartMedia cm){
         lstCartMedia.add(cm);
     }
     // data coupling
+    // Procedural cohesion
     public void removeCartMedia(CartMedia cm){
         lstCartMedia.remove(cm);
     }
@@ -38,6 +40,7 @@ public class Cart {
         lstCartMedia.clear();
     }
     // data coupling
+    // Procedural cohesion
     public int getTotalMedia(){
         int total = 0;
         for (Object obj : lstCartMedia) {
@@ -48,6 +51,7 @@ public class Cart {
     }
 
     // data coupling
+    // Procedural cohesion
     public int calSubtotal(){
         int total = 0;
         for (Object obj : lstCartMedia) {
@@ -58,6 +62,7 @@ public class Cart {
     }
 
     // data coupling
+    // Procedural cohesion
     public void checkAvailabilityOfProduct() throws SQLException{
         boolean allAvai = true;
         for (Object object : lstCartMedia) {
@@ -70,6 +75,7 @@ public class Cart {
     }
 
     // stamp coupling
+    // Procedural cohesion
     public CartMedia checkMediaInCart(Media media){
         for (CartMedia cartMedia : lstCartMedia) {
             if (cartMedia.getMedia().getId() == media.getId()) return cartMedia;
