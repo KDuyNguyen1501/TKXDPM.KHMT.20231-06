@@ -72,7 +72,7 @@ The recommended report structure will have a format as follows:
 <br>
 
 - Assigned tasks:
-  - cmt các nguyên lý solid bị vi phạm (sửa đổi code néu có) cho các class handler trong folder views
+  - Comment level coupling cho các class handler trong folder views
 
 - Implementation details:
   - Pull Request(s): [https://github.com/KDuyNguyen1501/TKXDPM.KHMT.20231-06/pull/5]()
@@ -133,6 +133,27 @@ The recommended report structure will have a format as follows:
 
 </details>
 
+<details>
+  <summary>W10: 04/12/2023~10/12/2023 </summary>
+<br>
+<details>
+<summary>Nguyễn Đức Dũng</summary>
+<br>
+
+- Assigned tasks:
+  - cmt các nguyên lý solid bị vi phạm (sửa đổi code néu có) cho các class handler trong folder views
+
+
+- Implementation details:
+  - Pull Request(s): []()
+  - Commit(s): [https://github.com/KDuyNguyen1501/TKXDPM.KHMT.20231-06/commit/808571fe4d7419035896c9e0d389c1e3bbc2d43b]()
+  - Specific implementation details:
+    - cmt các nguyên lý solid bị vi phạm (sửa đổi code néu có) cho các class handler trong folder views
+
+</details>
+
+
+</details>
 ---
 ## Pull request template
 
@@ -149,4 +170,3 @@ The recommended report structure will have a format as follows:
   - You don't need to follow the Wxx format as I mentioned before
   - Each person will have multiple pull requests
   - Whoever makes the pull request, attach that pull request to the report you attached above. Section `pull request(s)`
-
