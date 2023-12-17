@@ -18,9 +18,11 @@ import group06.views.screen.popup.PopupScreen;
 
 /**
  * This class controls the flow of place order usecase in our AIMS project
+ * 
  * @author nguyenlm
  */
-public class PlaceOrderController extends BaseController{
+// Không vi phạm SOLID
+public class PlaceOrderController extends BaseController {
 
     /**
      * Just for logging purpose
@@ -28,27 +30,30 @@ public class PlaceOrderController extends BaseController{
     private static Logger LOGGER = Utils.getLogger(PlaceOrderController.class.getName());
 
     /**
-     * This method checks the avalibility of product when user click PlaceOrder button
+     * This method checks the avalibility of product when user click PlaceOrder
+     * button
+     * 
      * @throws SQLException
      */
     // data coupling
-    public void placeOrder() throws SQLException{
+    public void placeOrder() throws SQLException {
         Cart.getCart().checkAvailabilityOfProduct();
     }
 
     /**
      * This method creates the new Order based on the Cart
+     * 
      * @return Order
      * @throws SQLException
      */
     // data coupling
-    public Order createOrder() throws SQLException{
+    public Order createOrder() throws SQLException {
         Order order = new Order();
         for (Object object : Cart.getCart().getListMedia()) {
             CartMedia cartMedia = (CartMedia) object;
-            OrderMedia orderMedia = new OrderMedia(cartMedia.getMedia(), 
-                                                   cartMedia.getQuantity(), 
-                                                   cartMedia.getPrice());    
+            OrderMedia orderMedia = new OrderMedia(cartMedia.getMedia(),
+                    cartMedia.getQuantity(),
+                    cartMedia.getPrice());
             order.getlstOrderMedia().add(orderMedia);
         }
         return order;
@@ -56,6 +61,7 @@ public class PlaceOrderController extends BaseController{
 
     /**
      * This method creates the new Invoice based on order
+     * 
      * @param order
      * @return Invoice
      */
@@ -66,56 +72,58 @@ public class PlaceOrderController extends BaseController{
 
     /**
      * This method takes responsibility for processing the shipping info from user
+     * 
      * @param info
      * @throws InterruptedException
      * @throws IOException
      */
     // Procedural cohesion
-    public void processDeliveryInfo(HashMap info) throws InterruptedException, IOException{
+    public void processDeliveryInfo(HashMap info) throws InterruptedException, IOException {
         LOGGER.info("Process Delivery Info");
         LOGGER.info(info.toString());
         validateDeliveryInfo(info);
     }
-    
+
     /**
-   * The method validates the info
-   * @param info
-   * @throws InterruptedException
-   * @throws IOException
-   */
-    public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException{
-    	
+     * The method validates the info
+     * 
+     * @param info
+     * @throws InterruptedException
+     * @throws IOException
+     */
+    public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException {
+
     }
-    
+
     // Procedural cohesion
     public boolean validatePhoneNumber(String phoneNumber) {
-    	// TODO: your work
-    	return false;
+        // TODO: your work
+        return false;
     }
-    
+
     // Procedural cohesion
     public boolean validateName(String name) {
-    	// TODO: your work
-    	return false;
+        // TODO: your work
+        return false;
     }
-    
+
     // Procedural cohesion
     public boolean validateAddress(String address) {
-    	// TODO: your work
-    	return false;
+        // TODO: your work
+        return false;
     }
-    
 
     /**
      * This method calculates the shipping fees of order
+     * 
      * @param order
      * @return shippingFee
      */
     // data coupling
     // Procedural cohesion
-    public int calculateShippingFee(Order order){
+    public int calculateShippingFee(Order order) {
         Random rand = new Random();
-        int fees = (int)( ( (rand.nextFloat()*10)/100 ) * order.getAmount() );
+        int fees = (int) (((rand.nextFloat() * 10) / 100) * order.getAmount());
         LOGGER.info("Order Amount: " + order.getAmount() + " -- Shipping Fees: " + fees);
         return fees;
     }
