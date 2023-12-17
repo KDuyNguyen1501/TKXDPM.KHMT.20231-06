@@ -1,3 +1,4 @@
+// Về mặt SOLID, đoạn mã không có vẻ có vi phạm nghiêm trọng vào các nguyên tắc.
 package group06.views.screen.home;
 
 import java.io.File;
@@ -18,7 +19,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import group06.utils.Utils;
 import group06.views.screen.FXMLScreenHandler;
-import group06.views.screen.home.HomeScreenHandler;
 import group06.views.screen.popup.PopupScreen;
 
 public class MediaHandler extends FXMLScreenHandler{

@@ -1,3 +1,4 @@
+// Về mặt SOLID, đoạn mã không có vẻ có vi phạm nghiêm trọng vào các nguyên tắc.
 package group06.views.screen.popup;
 
 import java.io.IOException;
