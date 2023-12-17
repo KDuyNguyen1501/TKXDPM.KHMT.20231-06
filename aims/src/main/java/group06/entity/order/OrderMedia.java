@@ -2,6 +2,8 @@ package group06.entity.order;
 
 import group06.entity.media.Media;
 
+// Không vi phạm SOLID
+
 public class OrderMedia {
     
     private Media media;

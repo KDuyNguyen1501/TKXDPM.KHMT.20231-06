@@ -1,5 +1,8 @@
 package group06.entity.shipping;
 
+// Không vi phạm SOLID
+
+
 public class Shipment {
     
     public void validateDeliveryInfo(){

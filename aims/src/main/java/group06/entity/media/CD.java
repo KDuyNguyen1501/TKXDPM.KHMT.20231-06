@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+// Không vi phạm SOLID
+
 public class CD extends Media {
 
     String artist;
