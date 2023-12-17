@@ -4,6 +4,9 @@ import group06.entity.cart.Cart;
 import group06.entity.cart.CartMedia;
 import group06.entity.media.Media;
 
+// Không vi phạm SOLID
+
+
 public class User {
     
     private int id;

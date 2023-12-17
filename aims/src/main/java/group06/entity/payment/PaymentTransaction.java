@@ -1,5 +1,7 @@
 package group06.entity.payment;
 
+// Không vi phạm SOLID
+
 public class PaymentTransaction {
 	private String errorCode;
 	private CreditCard card;

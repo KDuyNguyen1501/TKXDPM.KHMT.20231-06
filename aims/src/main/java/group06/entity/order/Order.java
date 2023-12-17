@@ -6,6 +6,9 @@ import java.util.List;
 
 import group06.utils.Configs;
 
+
+// Không vi phạm SOLID
+
 public class Order {
     
     private int shippingFees;

@@ -2,6 +2,7 @@ package group06.entity.invoice;
 
 import group06.entity.order.Order;
 
+// Không vi phạm SOLID
 public class Invoice {
 
     private Order order;

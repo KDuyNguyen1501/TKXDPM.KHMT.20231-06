@@ -11,7 +11,9 @@ import group06.entity.db.AIMSDB;
 import group06.utils.Utils;
 
 /**
- * The general media class, for another media it can be done by inheriting this class
+ * The general media class, for another media it can be done by inheriting this
+ * class
+ * 
  * @author nguyenlm
  */
 public class Media {
@@ -28,11 +30,25 @@ public class Media {
     protected String type;
     protected String imageURL;
 
-    public Media() throws SQLException{
+    // Vi phạm SRP
+    // Vi phạm: Lớp Media chịu trách nhiệm quản lý thông tin phương tiện và thực
+    // hiện các thao tác cơ sở dữ liệu.
+    // Chi tiết vi phạm: Lớp này nên chịu trách nhiệm chỉ về thông tin của phương
+    // tiện, và không nên thực hiện các thao tác cơ sở dữ liệu. Việc này làm cho lớp
+    // có nhiều lý do để thay đổi, và không tách biệt rõ ràng trách nhiệm.
+
+    // // OCP
+    // Vi phạm: Có thể cần sửa đổi mã nguồn khi muốn mở rộng các chức năng thao tác
+    // cơ sở dữ liệu.
+    // Chi tiết vi phạm: Nếu muốn thêm hoặc thay đổi cách thực hiện thao tác cơ
+    // sở dữ liệu, sẽ phải sửa đổi trực tiếp mã nguồn trong lớp Media, điều này
+    // không tuân thủ nguyên tắc OCP.
+
+    public Media() throws SQLException {
         stm = AIMSDB.getConnection().createStatement();
     }
 
-    public Media (int id, String title, String category, int price, int quantity, String type) throws SQLException{
+    public Media(int id, String title, String category, int price, int quantity, String type) throws SQLException {
         this.id = id;
         this.title = title;
         this.category = category;
@@ -40,49 +56,49 @@ public class Media {
         this.quantity = quantity;
         this.type = type;
 
-        //stm = AIMSDB.getConnection().createStatement();
+        // stm = AIMSDB.getConnection().createStatement();
     }
 
     // Data Coupling
-    public int getQuantity() throws SQLException{
+    public int getQuantity() throws SQLException {
         int updated_quantity = getMediaById(id).quantity;
         this.quantity = updated_quantity;
         return updated_quantity;
     }
 
     // Data Coupling
-    public Media getMediaById(int id) throws SQLException{
+    public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM Media ;";
         Statement stm = AIMSDB.getConnection().createStatement();
         ResultSet res = stm.executeQuery(sql);
-		if(res.next()) {
+        if (res.next()) {
 
             return new Media()
-                .setId(res.getInt("id"))
-                .setTitle(res.getString("title"))
-                .setQuantity(res.getInt("quantity"))
-                .setCategory(res.getString("category"))
-                .setMediaURL(res.getString("imageUrl"))
-                .setPrice(res.getInt("price"))
-                .setType(res.getString("type"));
+                    .setId(res.getInt("id"))
+                    .setTitle(res.getString("title"))
+                    .setQuantity(res.getInt("quantity"))
+                    .setCategory(res.getString("category"))
+                    .setMediaURL(res.getString("imageUrl"))
+                    .setPrice(res.getInt("price"))
+                    .setType(res.getString("type"));
         }
         return null;
     }
 
     // Data Coupling
-    public List getAllMedia() throws SQLException{
+    public List getAllMedia() throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement();
         ResultSet res = stm.executeQuery("select * from Media");
         ArrayList medium = new ArrayList<>();
         while (res.next()) {
             Media media = new Media()
-                .setId(res.getInt("id"))
-                .setTitle(res.getString("title"))
-                .setQuantity(res.getInt("quantity"))
-                .setCategory(res.getString("category"))
-                .setMediaURL(res.getString("imageUrl"))
-                .setPrice(res.getInt("price"))
-                .setType(res.getString("type"));
+                    .setId(res.getInt("id"))
+                    .setTitle(res.getString("title"))
+                    .setQuantity(res.getInt("quantity"))
+                    .setCategory(res.getString("category"))
+                    .setMediaURL(res.getString("imageUrl"))
+                    .setPrice(res.getInt("price"))
+                    .setType(res.getString("type"));
             medium.add(media);
         }
         return medium;
@@ -91,20 +107,20 @@ public class Media {
     // Data Coupling
     public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement();
-        if (value instanceof String){
+        if (value instanceof String) {
             value = "\"" + value + "\"";
         }
-        stm.executeUpdate(" update " + tbname + " set" + " " 
-                          + field + "=" + value + " " 
-                          + "where id=" + id + ";");
+        stm.executeUpdate(" update " + tbname + " set" + " "
+                + field + "=" + value + " "
+                + "where id=" + id + ";");
     }
 
-    // getter and setter 
+    // getter and setter
     public int getId() {
         return this.id;
     }
 
-    private Media setId(int id){
+    private Media setId(int id) {
         this.id = id;
         return this;
     }
@@ -136,11 +152,11 @@ public class Media {
         return this;
     }
 
-    public String getImageURL(){
+    public String getImageURL() {
         return this.imageURL;
     }
 
-    public Media setMediaURL(String url){
+    public Media setMediaURL(String url) {
         this.imageURL = url;
         return this;
     }
@@ -162,14 +178,14 @@ public class Media {
     @Override
     public String toString() {
         return "{" +
-            " id='" + id + "'" +
-            ", title='" + title + "'" +
-            ", category='" + category + "'" +
-            ", price='" + price + "'" +
-            ", quantity='" + quantity + "'" +
-            ", type='" + type + "'" +
-            ", imageURL='" + imageURL + "'" +
-            "}";
-    }    
+                " id='" + id + "'" +
+                ", title='" + title + "'" +
+                ", category='" + category + "'" +
+                ", price='" + price + "'" +
+                ", quantity='" + quantity + "'" +
+                ", type='" + type + "'" +
+                ", imageURL='" + imageURL + "'" +
+                "}";
+    }
 
 }

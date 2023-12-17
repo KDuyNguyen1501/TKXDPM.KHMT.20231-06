@@ -8,6 +8,8 @@ import java.util.List;
 
 import group06.entity.db.AIMSDB;
 
+//Không vi phạm SOLID
+
 public class Book extends Media {
 
     String author;
