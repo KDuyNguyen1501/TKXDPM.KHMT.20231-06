@@ -1,4 +1,5 @@
 # TKXDPM.VN.20231-06
+
 Template for managing Capstone's project in the Software Design and Construction course in the 2023.1 semester.
 
 ## Table of contents
@@ -14,12 +15,12 @@ Template for managing Capstone's project in the Software Design and Construction
 
 Before using this Github repository, everyone needs to register their group information using the table below:
 
-| Name                | Role        |
-| :------------------ | :---------- |
-| Nguyễn Khánh Duy    | Team Leader |
-| Nguyễn Bá Duy       | Member      |
-| Nguyễn Đức Dũng     | Member      |
-| Nguyễn Tùng Dương   | Member      |
+| Name              | Role        |
+| :---------------- | :---------- |
+| Nguyễn Khánh Duy  | Team Leader |
+| Nguyễn Bá Duy     | Member      |
+| Nguyễn Đức Dũng   | Member      |
+| Nguyễn Tùng Dương | Member      |
 
 ## What's included
 
@@ -43,6 +44,7 @@ The recommended report structure will have a format as follows:
 <br>
 
 - Assigned tasks:
+
   - Comment level coupling cho controller folder và entity.cart folder
 
 - Implementation details:
@@ -57,6 +59,7 @@ The recommended report structure will have a format as follows:
 <br>
 
 - Assigned tasks:
+
   - Comment level coupling cho entity
 
 - Implementation details:
@@ -72,6 +75,7 @@ The recommended report structure will have a format as follows:
 <br>
 
 - Assigned tasks:
+
   - Comment level coupling cho các class handler trong folder views
 
 - Implementation details:
@@ -87,6 +91,7 @@ The recommended report structure will have a format as follows:
 <br>
 
 - Assigned tasks:
+
   - Comment level coupling cho ViewCartController với 3 controller còn lại
 
 - Implementation details:
@@ -108,6 +113,7 @@ The recommended report structure will have a format as follows:
 <br>
 
 - Assigned tasks:
+
   - Comment level cohesion cho controller folder và entity.cart folder
 
 - Implementation details:
@@ -122,6 +128,7 @@ The recommended report structure will have a format as follows:
 <br>
 
 - Assigned tasks:
+
   - Comment level cohesion cho folder subsystem và utils
 
 - Implementation details:
@@ -134,15 +141,15 @@ The recommended report structure will have a format as follows:
 </details>
 
 <details>
-  <summary>W10: 11/12/2023~17/12/2023 </summary>
+  <summary>W11: 11/12/2023~17/12/2023 </summary>
 <br>
 <details>
 <summary>Nguyễn Đức Dũng</summary>
 <br>
 
 - Assigned tasks:
-  - cmt các nguyên lý solid bị vi phạm (sửa đổi code néu có) cho các class handler trong folder views
 
+  - cmt các nguyên lý solid bị vi phạm (sửa đổi code néu có) cho các class handler trong folder views
 
 - Implementation details:
   - Pull Request(s): []()
@@ -152,9 +159,23 @@ The recommended report structure will have a format as follows:
 
 </details>
 
+<details>
+<summary>Nguyễn Khánh Duy</summary>
+<br>
+
+- Assigned tasks:
+
+  - Xác định các lớp vi phạm SOLID principles của các lớp trong thư mục controller và entity/cart
+
+- Implementation details:
+  - Pull Request(s): [https://github.com/KDuyNguyen1501/TKXDPM.KHMT.20231-06/pull/8]()
+  - Specific implementation details:
+    - Xác định và comment vi phạm về SOLID principles của các lớp trong thư mục controller và entity/cart
 
 </details>
----
+
+</details>
+
 ## Pull request template
 
 - You are required to create a pull request according to these steps:

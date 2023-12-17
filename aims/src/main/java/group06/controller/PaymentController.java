@@ -13,7 +13,6 @@ import group06.entity.payment.PaymentTransaction;
 import group06.subsystem.InterbankInterface;
 import group06.subsystem.InterbankSubsystem;
 
-
 /**
  * This {@code PaymentController} class control the flow of the payment process
  * in our AIMS Software.
@@ -21,6 +20,7 @@ import group06.subsystem.InterbankSubsystem;
  * @author hieud
  *
  */
+// không vi phạm SOLID
 public class PaymentController extends BaseController {
 
 	/**
@@ -101,9 +101,10 @@ public class PaymentController extends BaseController {
 		}
 		return result;
 	}
+
 	// data coupling
 	// Procedural cohesion
-	public void emptyCart(){
-        Cart.getCart().emptyCart();
-    }
+	public void emptyCart() {
+		Cart.getCart().emptyCart();
+	}
 }
