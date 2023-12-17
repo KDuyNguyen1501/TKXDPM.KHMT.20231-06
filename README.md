@@ -176,6 +176,23 @@ The recommended report structure will have a format as follows:
 
 </details>
 
+<details>
+<summary>Nguyễn Bá Duy</summary>
+<br>
+
+- Assigned tasks:
+
+  - Xác định các lớp vi phạm SOLID principles của các lớp trong thư mục entity
+
+- Implementation details:
+  - Pull Request(s): [https://github.com/KDuyNguyen1501/TKXDPM.KHMT.20231-06/pull/9]()
+  - Specific implementation details:
+    - Xác định và comment vi phạm về SOLID principles của các lớp trong thư mục entity
+
+</details>
+
+</details>
+
 ## Pull request template
 
 - You are required to create a pull request according to these steps:
