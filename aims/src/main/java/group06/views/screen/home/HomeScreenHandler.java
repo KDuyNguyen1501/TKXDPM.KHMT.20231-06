@@ -1,3 +1,4 @@
+// Về mặt SOLID, đoạn mã không có vẻ có vi phạm nghiêm trọng vào các nguyên tắc.
 package group06.views.screen.home;
 
 import java.io.File;
@@ -7,12 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import group06.common.exception.ViewCartException;
-import group06.controller.BaseController;
 import group06.controller.HomeController;
 import group06.controller.ViewCartController;
 import group06.entity.cart.Cart;
