@@ -134,7 +134,7 @@ The recommended report structure will have a format as follows:
 </details>
 
 <details>
-  <summary>W10: 04/12/2023~10/12/2023 </summary>
+  <summary>W10: 11/12/2023~17/12/2023 </summary>
 <br>
 <details>
 <summary>Nguyễn Đức Dũng</summary>
