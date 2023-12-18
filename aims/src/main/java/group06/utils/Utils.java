@@ -11,7 +11,9 @@ import java.util.Locale;
 import java.util.logging.Logger;
 
 /**
- * @author nguyenlm Contains helper functions
+ * Lớp chứa các hàm tiện ích.
+ * 
+ * @author nguyenlm
  */
 public class Utils {
 
@@ -25,6 +27,12 @@ public class Utils {
 		return Logger.getLogger(className);
 	}
 
+	/**
+	 * VI PHẠM NGUYÊN LÝ SOLID: Hàm này có thể được chia thành một lớp hoặc giao diện riêng để xử lý định dạng tiền tệ.
+	 * 
+	 * @param num - Số nguyên cần định dạng.
+	 * @return chuỗi định dạng tiền tệ.
+	 */
 	public static String getCurrencyFormat(int num) {
 		Locale vietname = new Locale("vi", "VN");
 		NumberFormat defaultFormat = NumberFormat.getCurrencyInstance(vietname);
@@ -32,12 +40,10 @@ public class Utils {
 	}
 
 	/**
-	 * Return a {@link java.lang.String String} that represents the current time in the format of yyyy-MM-dd HH:mm:ss.
+	 * VI PHẠM NGUYÊN LÝ SOLID: Hàm này có thể được chia thành một lớp hoặc giao diện riêng để xử lý định dạng thời gian.
 	 * 
-	 * @author hieudm
-	 * @return the current time as {@link java.lang.String String}.
+	 * @return chuỗi định dạng thời gian.
 	 */
-	
 	public static String getToday() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    Date date = new Date();
@@ -45,12 +51,10 @@ public class Utils {
 	}
 
 	/**
-	 * Return a {@link java.lang.String String} that represents the cipher text
-	 * encrypted by md5 algorithm.
+	 * VI PHẠM NGUYÊN LÝ SOLID: Hàm này có thể được chia thành một lớp hoặc giao diện riêng để xử lý mã hóa.
 	 * 
-	 * @author hieudm vnpay
-	 * @param message - plain text as {@link java.lang.String String}.
-	 * @return cipher text as {@link java.lang.String String}.
+	 * @param message - Chuỗi cần mã hóa.
+	 * @return Chuỗi đã mã hóa.
 	 */
 	public static String md5(String message) {
 		String digest = null;
@@ -69,5 +73,4 @@ public class Utils {
 		}
 		return digest;
 	}
-
 }
