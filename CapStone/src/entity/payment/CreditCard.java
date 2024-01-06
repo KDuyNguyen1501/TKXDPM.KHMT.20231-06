@@ -15,4 +15,14 @@ public class CreditCard {
 		this.cvvCode = cvvCode;
 		this.dateExpired = dateExpired;
 	}
+
+	@Override
+	public String toString() {
+		return "CreditCard{" +
+				"cardCode='" + cardCode + '\'' +
+				", owner='" + owner + '\'' +
+				", cvvCode=" + cvvCode +
+				", dateExpired='" + dateExpired + '\'' +
+				'}';
+	}
 }

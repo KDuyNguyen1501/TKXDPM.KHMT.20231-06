@@ -1,78 +1,122 @@
 package views.screen.payment;
 
-import java.io.IOException;
-import java.util.Map;
-
 import controller.PaymentController;
-import entity.cart.Cart;
-import common.exception.PlaceOrderException;
 import entity.invoice.Invoice;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import subsystem.vnPay.Config;
 import utils.Configs;
+import utils.Utils;
 import views.screen.BaseScreenHandler;
-import views.screen.popup.PopupScreen;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PaymentScreenHandler extends BaseScreenHandler {
 
-	@FXML
-	private Button btnConfirmPayment;
+    private Invoice invoice;
+    @FXML
+    private Label pageTitle;
+    @FXML
+    private VBox vBox;
 
-	@FXML
-	private ImageView loadingImage;
 
-	private Invoice invoice;
+    public PaymentScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
+        super(stage, screenPath);
+        this.invoice = invoice;
 
-	public PaymentScreenHandler(Stage stage, String screenPath, int amount, String contents) throws IOException {
-		super(stage, screenPath);
-	}
+        displayWebView(); // Control Coupling //Control Cohesion
 
-	public PaymentScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
-		super(stage, screenPath);
-		this.invoice = invoice;
-		
-		btnConfirmPayment.setOnMouseClicked(e -> {
-			try {
-				confirmToPayOrder();
-				((PaymentController) getBController()).emptyCart();
-			} catch (Exception exp) {
-				System.out.println(exp.getStackTrace());
-			}
-		});
-	}
+    }
 
-	@FXML
-	private Label pageTitle;
+    // Control Coupling // Data Coupling 
+    private void displayWebView() {
+        var paymentController = new PaymentController();
 
-	@FXML
-	private TextField cardNumber;
+        var paymentUrl = paymentController.getUrlPay(invoice.getAmount(), "Thanh toan hoa don AIMS");
+        WebView paymentView = new WebView();
+        WebEngine webEngine = paymentView.getEngine();
+        webEngine.load(paymentUrl);
+        webEngine.locationProperty().addListener((observable, oldValue, newValue) -> {
+            // Xử lý khi URL thay đổi
+            // Data Coupling // Control Coupling
+            handleUrlChanged(newValue);
+        });
+        vBox.getChildren().clear();
+        vBox.getChildren().add(paymentView);
+    }
 
-	@FXML
-	private TextField holderName;
+    // Hàm chuyển đổi query string thành Map
+//Functional Cohesion
+    private static Map<String, String> parseQueryString(String query) {
+        Map<String, String> params = new HashMap<>();
+        if (query != null && !query.isEmpty()) {
+            String[] pairs = query.split("&");
+            for (String pair : pairs) {
+                String[] keyValue = pair.split("=");
+                if (keyValue.length == 2) {
+                    params.put(keyValue[0], keyValue[1]);
+                }
+            }
+        }
+        return params;
+    }
 
-	@FXML
-	private TextField expirationDate;
+    /**
+     * Xử lý khi URL thay đổi
+     *
+     * @param newValue url vnPay return về
+     */
+// Control Cohesion
+    private void handleUrlChanged(String newValue) {
+        if (newValue.contains(Config.vnp_ReturnUrl)) {
+            try {
+                URI uri = new URI(newValue);
+                String query = uri.getQuery();
 
-	@FXML
-	private TextField securityCode;
+                // Chuyển đổi query thành Map
+                Map<String, String> params = parseQueryString(query);
 
-	void confirmToPayOrder() throws IOException{
-		String contents = "pay order";
-		PaymentController ctrl = (PaymentController) getBController();
-		Map<String, String> response = ctrl.payOrder(invoice.getAmount(), contents, cardNumber.getText(), holderName.getText(),
-				expirationDate.getText(), securityCode.getText());
+                payOrder(params);
 
-		BaseScreenHandler resultScreen = new ResultScreenHandler(this.stage, Configs.RESULT_SCREEN_PATH, response.get("RESULT"), response.get("MESSAGE") );
-		resultScreen.setPreviousScreen(this);
-		resultScreen.setHomeScreenHandler(homeScreenHandler);
-		resultScreen.setScreenTitle("Result Screen");
-		resultScreen.show();
-	}
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Thực hiện thanh toán đơn hàng
+     *
+     * @param res kết quả vnPay trả về
+     * @throws IOException
+     */
+// Control Coupling
+// Control Cohesion
+    void payOrder(Map<String, String> res) throws IOException {
+
+        var ctrl = (PaymentController) super.getBController();
+        Map<String, String> response = ctrl.makePayment(res, this.invoice.getOrder().getId());
+
+        // Tạo và hiển thị màn hình kết quả
+        BaseScreenHandler resultScreen = new ResultScreenHandler(this.stage, Configs.RESULT_SCREEN_PATH,
+                response.get("RESULT"), response.get("MESSAGE"));
+        ctrl.emptyCart();
+        resultScreen.setPreviousScreen(this);
+        resultScreen.setHomeScreenHandler(homeScreenHandler);
+        resultScreen.setScreenTitle("Result Screen");
+        resultScreen.show();
+
+    }
 
 }
