@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="aims" uuid="de1ccccf-3183-4d90-abc3-147b8eaaaec3">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\K65-Computer Science-BKHN\2023-1\TKXDPM\Capstone\TKXDPM.KHMT.20231-06\CapStone\assets\db\aims.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name=".fuse_hidden0000007d00000006" uuid="6a388369-84c0-4f5f-a034-c08d09c230dd">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\K65-Computer Science-BKHN\2023-1\TKXDPM\Capstone\TKXDPM.KHMT.20231-06\CapStone\assets\db\.fuse_hidden0000007d00000006</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name=".fuse_hidden0000007d00000003" uuid="b43d4c42-46ac-4222-86cb-0baa1e3ee102">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\K65-Computer Science-BKHN\2023-1\TKXDPM\Capstone\TKXDPM.KHMT.20231-06\CapStone\assets\db\.fuse_hidden0000007d00000003</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>
