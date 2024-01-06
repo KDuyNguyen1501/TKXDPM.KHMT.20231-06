@@ -22,7 +22,7 @@ public class AccountController extends BaseController {
     public void register(String name, String username, String password, String confirmPassword, String birthDate, String phoneNumber) throws SQLException {
         if (password.compareTo(confirmPassword) == 0) {
             Account loginAccount = new Account(name, username, password, birthDate, phoneNumber);
-            acc = loginAccount.register();
+            acc = loginAccount.signup();
         } else {System.out.println(password + " " + confirmPassword);
             throw new SignupFailedException("Mật khẩu và xác nhận mật khẩu không trùng nhau");
         }

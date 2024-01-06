@@ -1,3 +1,5 @@
+package test;
+
 import controller.PlaceOrderController;
 import org.junit.jupiter.api.Test;
 

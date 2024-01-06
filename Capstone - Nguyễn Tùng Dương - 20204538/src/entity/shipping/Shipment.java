@@ -1,8 +1,6 @@
 package entity.shipping;
 
 import entity.db.AIMSDB;
-import jdk.jshell.spi.ExecutionControl;
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
