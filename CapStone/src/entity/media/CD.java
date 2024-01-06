@@ -14,19 +14,22 @@ public class CD extends Media {
     String musicType;
     Date releasedDate;
 
-    public CD() throws SQLException{
+    public CD() throws SQLException {
 
     }
 
-    public CD(int id, String title, String category, int price, int quantity, String type, int value, String imageUrl) throws SQLException{
+    public CD(int id, String title, String category, int price, int quantity, String type, int value, String imageUrl)
+            throws SQLException {
         super(id, title, category, price, quantity, type, value, imageUrl);
         this.releasedDate = new Date();
         this.artist = "artist";
         this.recordLabel = "recordLabel";
         this.musicType = "musicType";
     }
-    public CD(int id, String title, String category, int price, int quantity, String type, int value, String imageUrl, String artist,
-            String recordLabel, String musicType, Date releasedDate) throws SQLException{
+
+    public CD(int id, String title, String category, int price, int quantity, String type, int value, String imageUrl,
+            String artist,
+            String recordLabel, String musicType, Date releasedDate) throws SQLException {
         super(id, title, category, price, quantity, type, value, imageUrl);
         this.artist = artist;
         this.recordLabel = recordLabel;
@@ -34,42 +37,73 @@ public class CD extends Media {
         this.releasedDate = releasedDate;
     }
 
+    /**
+     * @return String
+     */
     public String getArtist() {
         return this.artist;
     }
 
+    /**
+     * @param artist
+     * @return CD
+     */
     public CD setArtist(String artist) {
         this.artist = artist;
         return this;
     }
 
+    /**
+     * @return String
+     */
     public String getRecordLabel() {
         return this.recordLabel;
     }
 
+    /**
+     * @param recordLabel
+     * @return CD
+     */
     public CD setRecordLabel(String recordLabel) {
         this.recordLabel = recordLabel;
         return this;
     }
 
+    /**
+     * @return String
+     */
     public String getMusicType() {
         return this.musicType;
     }
 
+    /**
+     * @param musicType
+     * @return CD
+     */
     public CD setMusicType(String musicType) {
         this.musicType = musicType;
         return this;
     }
 
+    /**
+     * @return Date
+     */
     public Date getReleasedDate() {
         return this.releasedDate;
     }
 
+    /**
+     * @param releasedDate
+     * @return CD
+     */
     public CD setReleasedDate(Date releasedDate) {
         this.releasedDate = releasedDate;
         return this;
     }
 
+    /**
+     * @return String
+     */
     @Override
     public String toString() {
         return "{" + super.toString() + " artist='" + artist + "'" + ", recordLabel='" + recordLabel + "'"
@@ -99,16 +133,17 @@ public class CD extends Media {
 
         return false;
     }
+
     @Override
     public Media getMediaById(int id) throws SQLException {
-        String sql = "SELECT * FROM "+
-                     "aims.CD " +
-                     "INNER JOIN aims.Media " +
-                     "ON Media.id = CD.id " +
-                     "where Media.id = " + id + ";";
+        String sql = "SELECT * FROM " +
+                "aims.CD " +
+                "INNER JOIN aims.Media " +
+                "ON Media.id = CD.id " +
+                "where Media.id = " + id + ";";
         ResultSet res = stm.executeQuery(sql);
-		if(res.next()) {
-            
+        if (res.next()) {
+
             // from media table
             String title = "";
             String type = res.getString("type");
@@ -123,15 +158,18 @@ public class CD extends Media {
             String recordLabel = res.getString("recordLabel");
             String musicType = res.getString("musicType");
             Date releasedDate = res.getDate("releasedDate");
-           
+
             return new CD(id, title, category, price, quantity, type, value, imageUrl,
-                          artist, recordLabel, musicType, releasedDate);
-            
-		} else {
-			throw new SQLException();
-		}
+                    artist, recordLabel, musicType, releasedDate);
+
+        } else {
+            throw new SQLException();
+        }
     }
 
+    /**
+     * @return List
+     */
     @Override
     public List getAllMedia() throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement();
@@ -144,7 +182,7 @@ public class CD extends Media {
         while (res.next()) {
             Media media = new Media(res.getInt("id"), res.getString("title"),
                     res.getString("category"), res.getInt("price"),
-                    res.getInt("quantity"), res.getString("type"),res.getInt("value"),res.getString("imageUrl"));
+                    res.getInt("quantity"), res.getString("type"), res.getInt("value"), res.getString("imageUrl"));
             medium.add(media);
         }
         return medium;

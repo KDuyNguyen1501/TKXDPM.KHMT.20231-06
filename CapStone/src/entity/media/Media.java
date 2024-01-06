@@ -1,25 +1,31 @@
 package entity.media;
 
+import entity.db.AIMSDB;
+import utils.Utils;
+
+import entity.db.AIMSDB;
+import utils.Utils;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
 
-import entity.db.AIMSDB;
-import utils.Utils;
-
 /**
- * The general media class, for another media it can be done by inheriting this class
+ * The general media class, for another media it can be done by inheriting this
+ * class
+ *
  *
  * @author nguyenlm
  */
 public class Media {
 
+    protected static boolean isSupportedPlaceRushOrder = new Random().nextBoolean();
     private static Logger LOGGER = Utils.getLogger(Media.class.getName());
-
     protected Statement stm;
     protected int id;
     protected String title;
@@ -34,7 +40,8 @@ public class Media {
         stm = AIMSDB.getConnection().createStatement();
     }
 
-    public Media(int id, String title, String category, int price, int quantity, String type, int value, String imageUrl) throws SQLException {
+    public Media(int id, String title, String category, int price, int quantity, String type, int value,
+            String imageUrl) throws SQLException {
         this.id = id;
         this.title = title;
         this.category = category;
@@ -44,9 +51,20 @@ public class Media {
         this.value = value;
         this.imageURL = imageUrl;
 
-        //stm = AIMSDB.getConnection().createStatement();
+        // stm = AIMSDB.getConnection().createStatement();
     }
 
+    /**
+     * @return boolean
+     */
+    public static boolean getIsSupportedPlaceRushOrder() {
+        return Media.isSupportedPlaceRushOrder;
+    }
+
+    /**
+     * @return int
+     * @throws SQLException
+     */
     public int getQuantity() throws SQLException {
         int updated_quantity = getMediaById(id).quantity;
         this.quantity = updated_quantity;
@@ -70,10 +88,10 @@ public class Media {
         }
 
         ResultSet generatedKeys = ps.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                this.setId(generatedKeys.getInt(1));
-                return true;
-            }
+        if (generatedKeys.next()) {
+            this.setId(generatedKeys.getInt(1));
+            return true;
+        }
 
         return false;
     }
@@ -138,7 +156,10 @@ public class Media {
         return ps.executeUpdate() == 1;
     }
 
-    // getter and setter 
+    /**
+     * @return int
+     */
+    // getter and setter
     public int getId() {
         return this.id;
     }
@@ -148,28 +169,49 @@ public class Media {
         return this;
     }
 
+    /**
+     * @return String
+     */
     public String getTitle() {
         return this.title;
     }
 
+    /**
+     * @param title
+     * @return Media
+     */
     public Media setTitle(String title) {
         this.title = title;
         return this;
     }
 
+    /**
+     * @return String
+     */
     public String getCategory() {
         return this.category;
     }
 
+    /**
+     * @param category
+     * @return Media
+     */
     public Media setCategory(String category) {
         this.category = category;
         return this;
     }
 
+    /**
+     * @return int
+     */
     public int getPrice() {
         return this.price;
     }
 
+    /**
+     * @param price
+     * @return Media
+     */
     public Media setPrice(int price) {
         this.price = price;
         return this;
@@ -184,17 +226,24 @@ public class Media {
         return this;
     }
 
-    public Media setQuantity(int quantity) {
-        this.quantity = quantity;
-        return this;
-    }
-
+    /**
+     * @return String
+     */
     public String getType() {
         return this.type;
     }
 
+    /**
+     * @param type
+     * @return Media
+     */
     public Media setType(String type) {
         this.type = type;
+        return this;
+    }
+
+    public Media setQuantity(int quantity) {
+        this.quantity = quantity;
         return this;
     }
 
@@ -202,11 +251,15 @@ public class Media {
         this.value = value;
         return this;
     }
+
     public int getValue() {
         return this.value;
     }
 
 
+    /**
+     * @return String
+     */
     @Override
     public String toString() {
         return "{" +

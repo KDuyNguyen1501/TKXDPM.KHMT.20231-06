@@ -22,5 +22,17 @@
       <jdbc-url>jdbc:sqlite:D:\K65-Computer Science-BKHN\2023-1\TKXDPM\Capstone\TKXDPM.KHMT.20231-06\CapStone\assets\db\.fuse_hidden0000007d00000003</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="aims [2]" uuid="f166d667-7d2e-4e92-a0d3-f6e6c3e11420">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\K65-Computer Science-BKHN\2023-1\TKXDPM\Capstone\TKXDPM.KHMT.20231-06\CapStone\aims.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+      <libraries>
+        <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.43.0/org/xerial/sqlite-jdbc/3.43.0.0/sqlite-jdbc-3.43.0.0.jar</url>
+        </library>
+      </libraries>
+    </data-source>
   </component>
 </project>
