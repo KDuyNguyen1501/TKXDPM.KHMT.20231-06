@@ -38,18 +38,18 @@ public class Configs {
 	public static float PERCENT_VAT = 10;
 
 	// static resource
-	public static final String IMAGE_PATH = "assets/images";
-	public static final String INVOICE_SCREEN_PATH = "/views/fxml/invoice.fxml";
-	public static final String INVOICE_MEDIA_SCREEN_PATH = "/views/fxml/media_invoice.fxml";
-	public static final String PAYMENT_SCREEN_PATH = "/views/fxml/payment.fxml";
-	public static final String RESULT_SCREEN_PATH = "/views/fxml/result.fxml";
-	public static final String SPLASH_SCREEN_PATH = "/views/fxml/splash.fxml";
-	public static final String CART_SCREEN_PATH = "/views/fxml/cart.fxml";
-	public static final String SHIPPING_SCREEN_PATH = "/views/fxml/shipping.fxml";
-	public static final String CART_MEDIA_PATH = "/views/fxml/media_cart.fxml";
-	public static final String HOME_PATH  = "/views/fxml/home.fxml";
-	public static final String HOME_MEDIA_PATH = "/views/fxml/media_home.fxml";
-	public static final String POPUP_PATH = "/views/fxml/popup.fxml";
+	public static final String IMAGE_PATH = "/assets/images";
+	public static final String INVOICE_SCREEN_PATH = "/group06/views/fxml/invoice.fxml";
+	public static final String INVOICE_MEDIA_SCREEN_PATH = "/group06/views/fxml/media_invoice.fxml";
+	public static final String PAYMENT_SCREEN_PATH = "/group06/views/fxml/payment.fxml";
+	public static final String RESULT_SCREEN_PATH = "/group06/views/fxml/result.fxml";
+	public static final String SPLASH_SCREEN_PATH = "/group06/views/fxml/splash.fxml";
+	public static final String CART_SCREEN_PATH = "/group06/views/fxml/cart.fxml";
+	public static final String SHIPPING_SCREEN_PATH = "/group06/views/fxml/shipping.fxml";
+	public static final String CART_MEDIA_PATH = "/group06/views/fxml/media_cart.fxml";
+	public static final String HOME_PATH  = "/group06/views/fxml/home.fxml";
+	public static final String HOME_MEDIA_PATH = "/group06/views/fxml/media_home.fxml";
+	public static final String POPUP_PATH = "/group06/views/fxml/popup.fxml";
 
 	public static Font REGULAR_FONT = Font.font("Segoe UI", FontWeight.NORMAL, FontPosture.REGULAR, 24);
 

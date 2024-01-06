@@ -18,18 +18,25 @@ public class AIMSDB {
     public static Connection getConnection() {
         if (connect != null)
             return connect;
+        
         try {
             Class.forName("org.sqlite.JDBC");
-            String url = "jdbc:sqlite:assets/db/aims.db";
+            String url = "jdbc:sqlite:src/main/assets/db/aims.db";
             connect = DriverManager.getConnection(url);
-            LOGGER.info("Connect database successfully");
-        } catch (Exception e) {
-            LOGGER.info(e.getMessage());
+            LOGGER.info("Connected to the database successfully");
+        } catch (ClassNotFoundException e) {
+            LOGGER.severe("SQLite JDBC driver not found");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            LOGGER.severe("Error connecting to the database");
+            e.printStackTrace();
         }
+
         return connect;
     }
 
     public static void main(String[] args) {
-        AIMSDB.getConnection();
+        Connection connection = AIMSDB.getConnection();
+        System.out.println("Database connection: " + connection);
     }
 }
