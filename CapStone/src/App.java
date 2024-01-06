@@ -9,8 +9,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import utils.Configs;
 import views.screen.admin.AdminHomeHandler;
-import views.screen.home.HomeScreenHandler;
-import views.screen.login.LoginScreenHandler;
 
 import java.io.IOException;
 
