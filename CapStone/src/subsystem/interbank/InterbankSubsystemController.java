@@ -1,5 +1,6 @@
 package subsystem.interbank;
 
+import java.util.Date;
 import java.util.Map;
 
 import common.exception.InternalServerErrorException;
@@ -69,9 +70,16 @@ public class InterbankSubsystemController {
 		MyMap transcation = (MyMap) response.get("transaction");
 		CreditCard card = new CreditCard((String) transcation.get("cardCode"), (String) transcation.get("owner"),
 				Integer.parseInt((String) transcation.get("cvvCode")), (String) transcation.get("dateExpired"));
-		PaymentTransaction trans = new PaymentTransaction((String) response.get("errorCode"), card,
-				(String) transcation.get("transactionId"), (String) transcation.get("transactionContent"),
-				Integer.parseInt((String) transcation.get("amount")), (String) transcation.get("createdAt"));
+		PaymentTransaction trans = new PaymentTransaction(
+				(String) response.get("errorCode"),
+//				card.toString(),
+				(String) transcation.get("transactionId") != null ?(String) transcation.get("transactionId"):"" ,
+				(String) transcation.get("transactionContent"),
+				Integer.parseInt((String) transcation.get("amount")),
+				(Date) transcation.get("createdAt"),
+				(String) transcation.get("cardType"),
+				(String) transcation.get("txnRef")
+		);
 
 		switch (trans.getErrorCode()) {
 		case "00":
