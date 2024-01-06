@@ -7,6 +7,7 @@ import controller.OrderController;
 import controller.ViewCartController;
 import entity.cart.Cart;
 import entity.media.Media;
+import entity.user.Account;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -22,6 +23,7 @@ import views.screen.BaseScreenHandler;
 import views.screen.cart.CartScreenHandler;
 import views.screen.login.LoginScreenHandler;
 import views.screen.order.OrderScreenHandler;
+import views.screen.usermanagement.UserManagementHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,6 +34,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
+
+import static entity.user.Account.getAllAccounts;
 
 public class HomeScreenHandler extends BaseScreenHandler implements Initializable {
 
@@ -45,6 +49,9 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 
     @FXML
     private Button orderBtn;
+
+    @FXML
+    private Button showUser;
 
     @FXML
     private ImageView aimsImage;
@@ -94,6 +101,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     public void show() {
         try {
             if (accountController.getLoggedInAccount() != null) {
+                if (accountController.getLoggedInAccount().getRole() == 0) {
+                    showUser.setVisible(true);
+                    var x = getAllAccounts();
+                }
                 login.setText("Chào mừng, " + accountController.getLoggedInAccount().getName());
             }
         } catch(Exception e) {
@@ -112,6 +123,9 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 // Control Cohesion
     public void initialize(URL arg0, ResourceBundle arg1) {
         setBController(new HomeController());
+
+        Account.createAdmin();
+
         try {
             List medium = getBController().getAllMedia();
             this.homeItems = new ArrayList<>();
@@ -124,6 +138,35 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
             LOGGER.info("Errors occured: " + e.getMessage());
             e.printStackTrace();
         }
+
+        showUser.setOnMouseClicked(e -> {
+            UserManagementHandler userManagementHandler;
+            try {
+                userManagementHandler = new UserManagementHandler(stage, Configs.USER_MANAGEMENT_PATH);
+                userManagementHandler.setHomeScreenHandler(this);
+                userManagementHandler.setScreenTitle("All user");
+                accountController = userManagementHandler.getBController();
+                userManagementHandler.show();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
+
+//        showUser.setOnMouseClicked(e -> {
+//            LoginScreenHandler loginHandler;
+//            try {
+//                loginHandler = new LoginScreenHandler(stage, Configs.USER_MANAGEMENT_PATH);
+//                loginHandler.setHomeScreenHandler(this);
+//                loginHandler.setScreenTitle("Login");
+//                accountController = loginHandler.getBController();
+//                loginHandler.show();
+//            } catch (IOException e1) {
+//                e1.printStackTrace();
+//            }
+//        });
+
+        showUser.setVisible(false);
+
 
         login.setOnMouseClicked(e -> {
             LoginScreenHandler loginHandler;

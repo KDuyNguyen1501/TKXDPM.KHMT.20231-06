@@ -3,7 +3,9 @@ package entity.user;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -111,6 +113,10 @@ public class Account {
         }
     }
 
+    public int getRole(){
+        return role;
+    }
+
     public boolean validateLoginInformation() {
         Matcher matcher = pattern.matcher(password);
         if (matcher.matches()) {
@@ -161,6 +167,32 @@ public class Account {
         }
     }
 
+    public static List<Account> getAllAccounts() throws SQLException {
+        List<Account> accountList = new ArrayList<>();
+        System.out.println("///////");
+
+        String sql = "SELECT * FROM User;";
+        try (Statement stm = AIMSDB.getConnection().createStatement();
+             ResultSet res = stm.executeQuery(sql)) {
+
+            while (res.next()) {
+                Account account = new Account(res.getInt("id"), res.getString("name"), res.getString("username"),
+                        res.getString("password"), res.getString("birthdate"), res.getString("phoneNumber"), res.getInt("role"));
+                System.out.println(account);
+                System.out.println(res.getString("name"));
+
+                accountList.add(account);
+            }
+        }
+
+        if (accountList.isEmpty()) {
+            throw new LoginFailedException("Không tồn tại tài khoản");
+        }
+        System.out.println("///////");
+
+        return accountList;
+    }
+
     public Account signup() throws SQLException {
         if (validateSignUpInformation()) {
             String sql = "INSERT INTO User (username,name, password,birthDate,phoneNumber,role) VALUES ('"
@@ -177,6 +209,50 @@ public class Account {
             return getAccountByUsername(username);
         } else {
             throw new SignupFailedException("Sai thông tin");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", phone='" + phone + '\'' +
+                ", role=" + role +
+                '}';
+    }
+
+    public static void createAdmin(){
+        try{
+
+            String sql = "SELECT * FROM " +
+                    "User " +
+                    "where username = '" + "admin" + "';";
+            Statement stm = AIMSDB.getConnection().createStatement();
+            ResultSet res = stm.executeQuery(sql);
+            if (res.next()) {
+                return;
+            }
+        } catch (SQLException e) {
+                throw new RuntimeException(e);
+        }
+        try {
+            String sql = "INSERT INTO User (username,name, password,birthDate,phoneNumber,role) VALUES ('"
+                    + "admin" + "','"
+                    + "admin" + "','"
+                    + "Admin@admin1" + "','"
+                    + "01/01/2024" + "','"
+                    + "0123456789" + "','"
+                    + "0'"
+                    +");";
+
+            Statement stm = AIMSDB.getConnection().createStatement();
+                stm.executeUpdate(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }
