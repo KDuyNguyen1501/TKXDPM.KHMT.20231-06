@@ -1,7 +1,9 @@
 package entity.media;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import entity.db.AIMSDB;
+
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,15 +18,24 @@ public class CD extends Media {
 
     }
 
-    public CD(int id, String title, String category, int price, int quantity, String type, String artist,
-              String recordLabel, String musicType, Date releasedDate) throws SQLException {
-        super(id, title, category, price, quantity, type);
+    public CD(int id, String title, String category, int price, int quantity, String type, int value, String imageUrl)
+            throws SQLException {
+        super(id, title, category, price, quantity, type, value, imageUrl);
+        this.releasedDate = new Date();
+        this.artist = "artist";
+        this.recordLabel = "recordLabel";
+        this.musicType = "musicType";
+    }
+
+    public CD(int id, String title, String category, int price, int quantity, String type, int value, String imageUrl,
+            String artist,
+            String recordLabel, String musicType, Date releasedDate) throws SQLException {
+        super(id, title, category, price, quantity, type, value, imageUrl);
         this.artist = artist;
         this.recordLabel = recordLabel;
         this.musicType = musicType;
         this.releasedDate = releasedDate;
     }
-
 
     /**
      * @return String
@@ -32,7 +43,6 @@ public class CD extends Media {
     public String getArtist() {
         return this.artist;
     }
-
 
     /**
      * @param artist
@@ -43,14 +53,12 @@ public class CD extends Media {
         return this;
     }
 
-
     /**
      * @return String
      */
     public String getRecordLabel() {
         return this.recordLabel;
     }
-
 
     /**
      * @param recordLabel
@@ -61,14 +69,12 @@ public class CD extends Media {
         return this;
     }
 
-
     /**
      * @return String
      */
     public String getMusicType() {
         return this.musicType;
     }
-
 
     /**
      * @param musicType
@@ -79,14 +85,12 @@ public class CD extends Media {
         return this;
     }
 
-
     /**
      * @return Date
      */
     public Date getReleasedDate() {
         return this.releasedDate;
     }
-
 
     /**
      * @param releasedDate
@@ -96,7 +100,6 @@ public class CD extends Media {
         this.releasedDate = releasedDate;
         return this;
     }
-
 
     /**
      * @return String
@@ -108,12 +111,29 @@ public class CD extends Media {
                 + releasedDate + "'" + "}";
     }
 
+    @Override
+    public boolean addMedia() throws SQLException {
+        boolean addMediaSuccess = super.addMedia();
 
-    /**
-     * @param id
-     * @return Media
-     * @throws SQLException
-     */
+        if (addMediaSuccess) {
+            Connection con = AIMSDB.getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                    "INSERT INTO CD (id ,artist ,recordLabel, musicType, releasedDate) VALUES(?,?,?,?,?)");
+            ps.setInt(1, this.id);
+            ps.setString(2, this.artist);
+            ps.setString(3, this.recordLabel);
+            ps.setString(4, this.musicType);
+            ps.setDate(5, new java.sql.Date(this.releasedDate.getTime()));
+            int res = ps.executeUpdate();
+
+            if (res == 1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     @Override
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM " +
@@ -130,6 +150,8 @@ public class CD extends Media {
             int price = res.getInt("price");
             String category = res.getString("category");
             int quantity = res.getInt("quantity");
+            int value = res.getInt("value");
+            String imageUrl = res.getString("imageUrl");
 
             // from CD table
             String artist = res.getString("artist");
@@ -137,7 +159,7 @@ public class CD extends Media {
             String musicType = res.getString("musicType");
             Date releasedDate = res.getDate("releasedDate");
 
-            return new CD(id, title, category, price, quantity, type,
+            return new CD(id, title, category, price, quantity, type, value, imageUrl,
                     artist, recordLabel, musicType, releasedDate);
 
         } else {
@@ -145,13 +167,37 @@ public class CD extends Media {
         }
     }
 
-
     /**
      * @return List
      */
     @Override
-    public List getAllMedia() {
-        return null;
+    public List getAllMedia() throws SQLException {
+        Statement stm = AIMSDB.getConnection().createStatement();
+        String sql = "SELECT Media.* FROM " +
+                "Media " +
+                "INNER JOIN CD " +
+                "ON Media.id = CD.id;";
+        ResultSet res = stm.executeQuery(sql);
+        ArrayList medium = new ArrayList<>();
+        while (res.next()) {
+            Media media = new Media(res.getInt("id"), res.getString("title"),
+                    res.getString("category"), res.getInt("price"),
+                    res.getInt("quantity"), res.getString("type"), res.getInt("value"), res.getString("imageUrl"));
+            medium.add(media);
+        }
+        return medium;
     }
 
+    @Override
+    public boolean deleteMedia() throws SQLException {
+        PreparedStatement ps = AIMSDB.getConnection().prepareStatement(
+                "DELETE FROM CD WHERE id = ?");
+        ps.setInt(1, this.id);
+        int res = ps.executeUpdate();
+        if (res == 1) {
+            return super.deleteMedia();
+        }
+
+        return false;
+    }
 }

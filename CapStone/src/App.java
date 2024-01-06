@@ -8,6 +8,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import utils.Configs;
+import views.screen.admin.AdminHomeHandler;
 import views.screen.home.HomeScreenHandler;
 import views.screen.login.LoginScreenHandler;
 
@@ -60,10 +61,14 @@ public class App extends Application {
             // After fade out, load actual content
             fadeOut.setOnFinished((e) -> {
                 try {
-                    HomeScreenHandler homeHandler = new HomeScreenHandler(primaryStage, Configs.HOME_PATH);
-                    homeHandler.setScreenTitle("Home Screen");
-                    homeHandler.setImage();
-                    homeHandler.show();
+//                     HomeScreenHandler homeHandler = new HomeScreenHandler(primaryStage,
+//                     Configs.HOME_PATH);
+//                     homeHandler.setScreenTitle("Home Screen");
+//                     homeHandler.setImage();
+//                     homeHandler.show();
+                    AdminHomeHandler adminHome = new AdminHomeHandler(primaryStage, Configs.ADMIN_HOME_PATH);
+                    adminHome.setScreenTitle("Admin");
+                    adminHome.show();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -72,4 +77,6 @@ public class App extends Application {
             e.printStackTrace();
         }
     }
+
+
 }

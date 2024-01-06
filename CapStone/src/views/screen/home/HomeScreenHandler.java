@@ -83,7 +83,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     /**
      * @return Label
      */
-//Functional Cohesion
+    // Functional Cohesion
     public Label getNumMediaCartLabel() {
         return this.numMediaInCart;
     }
@@ -91,13 +91,13 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     /**
      * @return HomeController
      */
-//Functional Cohesion
+    // Functional Cohesion
     public HomeController getBController() {
         return (HomeController) super.getBController();
     }
 
     @Override
-//Sequential Cohesion
+    // Sequential Cohesion
     public void show() {
         try {
             if (accountController.getLoggedInAccount() != null) {
@@ -107,7 +107,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
                 }
                 login.setText("Chào mừng, " + accountController.getLoggedInAccount().getName());
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("null");
         }
         numMediaInCart.setText(String.valueOf(Cart.getCart().getListMedia().size()) + " media");
@@ -119,8 +119,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
      * @param arg1
      */
     @Override
-// Control Coupling
-// Control Cohesion
+    // Control Coupling
+    // Control Cohesion
     public void initialize(URL arg0, ResourceBundle arg1) {
         setBController(new HomeController());
 
@@ -152,21 +152,20 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
             }
         });
 
-//        showUser.setOnMouseClicked(e -> {
-//            LoginScreenHandler loginHandler;
-//            try {
-//                loginHandler = new LoginScreenHandler(stage, Configs.USER_MANAGEMENT_PATH);
-//                loginHandler.setHomeScreenHandler(this);
-//                loginHandler.setScreenTitle("Login");
-//                accountController = loginHandler.getBController();
-//                loginHandler.show();
-//            } catch (IOException e1) {
-//                e1.printStackTrace();
-//            }
-//        });
+        // showUser.setOnMouseClicked(e -> {
+        // LoginScreenHandler loginHandler;
+        // try {
+        // loginHandler = new LoginScreenHandler(stage, Configs.USER_MANAGEMENT_PATH);
+        // loginHandler.setHomeScreenHandler(this);
+        // loginHandler.setScreenTitle("Login");
+        // accountController = loginHandler.getBController();
+        // loginHandler.show();
+        // } catch (IOException e1) {
+        // e1.printStackTrace();
+        // }
+        // });
 
         showUser.setVisible(false);
-
 
         login.setOnMouseClicked(e -> {
             LoginScreenHandler loginHandler;
@@ -213,8 +212,9 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
         addMenuItem(1, "DVD", splitMenuBtnSearch);
         addMenuItem(2, "CD", splitMenuBtnSearch);
     }
-//Data Coupling 
-//Data Cohesion
+
+    // Data Coupling
+    // Data Cohesion
     public void setImage() {
         // fix image path caused by fxml
         File file1 = new File(Configs.IMAGE_PATH + "/" + "Logo.png");
@@ -229,8 +229,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     /**
      * @param items
      */
-//Data Coupling 
-//Data Cohesion
+    // Data Coupling
+    // Data Cohesion
     public void addMediaHome(List items) {
         ArrayList mediaItems = (ArrayList) ((ArrayList) items).clone();
         hboxMedia.getChildren().forEach(node -> {
@@ -257,8 +257,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
      * @param menuButton
      */
 
-// Data Coupling 
-// Data Cohesion
+    // Data Coupling
+    // Data Cohesion
     private void addMenuItem(int position, String text, MenuButton menuButton) {
         MenuItem menuItem = new MenuItem();
         Label label = new Label();
@@ -287,5 +287,4 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
         });
         menuButton.getItems().add(position, menuItem);
     }
-
 }

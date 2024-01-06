@@ -1,7 +1,9 @@
 package entity.media;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import entity.db.AIMSDB;
+
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,9 +21,24 @@ public class DVD extends Media {
 
     }
 
-    public DVD(int id, String title, String category, int price, int quantity, String type, String discType,
-               String director, int runtime, String studio, String subtitles, Date releasedDate, String filmType) throws SQLException {
-        super(id, title, category, price, quantity, type);
+    public DVD(int id, String title, String category, int price, int quantity, String type, int value, String imageUrl)
+            throws SQLException {
+        super(id, title, category, price, quantity, type, value, imageUrl);
+        this.releasedDate = new Date();
+        this.discType = "discType";
+        this.director = "director";
+        this.runtime = 100;
+        this.studio = "studio";
+        this.subtitles = "subtitles";
+        this.filmType = "filmType";
+
+    }
+
+    public DVD(int id, String title, String category, int price, int quantity, String type, int value, String imageUrl,
+            String discType,
+            String director, int runtime, String studio, String subtitles, Date releasedDate, String filmType)
+            throws SQLException {
+        super(id, title, category, price, quantity, type, value, imageUrl);
         this.discType = discType;
         this.director = director;
         this.runtime = runtime;
@@ -31,14 +48,12 @@ public class DVD extends Media {
         this.filmType = filmType;
     }
 
-
     /**
      * @return String
      */
     public String getDiscType() {
         return this.discType;
     }
-
 
     /**
      * @param discType
@@ -49,14 +64,12 @@ public class DVD extends Media {
         return this;
     }
 
-
     /**
      * @return String
      */
     public String getDirector() {
         return this.director;
     }
-
 
     /**
      * @param director
@@ -67,14 +80,12 @@ public class DVD extends Media {
         return this;
     }
 
-
     /**
      * @return int
      */
     public int getRuntime() {
         return this.runtime;
     }
-
 
     /**
      * @param runtime
@@ -85,14 +96,12 @@ public class DVD extends Media {
         return this;
     }
 
-
     /**
      * @return String
      */
     public String getStudio() {
         return this.studio;
     }
-
 
     /**
      * @param studio
@@ -103,14 +112,12 @@ public class DVD extends Media {
         return this;
     }
 
-
     /**
      * @return String
      */
     public String getSubtitles() {
         return this.subtitles;
     }
-
 
     /**
      * @param subtitles
@@ -121,14 +128,12 @@ public class DVD extends Media {
         return this;
     }
 
-
     /**
      * @return Date
      */
     public Date getReleasedDate() {
         return this.releasedDate;
     }
-
 
     /**
      * @param releasedDate
@@ -139,14 +144,12 @@ public class DVD extends Media {
         return this;
     }
 
-
     /**
      * @return String
      */
     public String getFilmType() {
         return this.filmType;
     }
-
 
     /**
      * @param filmType
@@ -156,7 +159,6 @@ public class DVD extends Media {
         this.filmType = filmType;
         return this;
     }
-
 
     /**
      * @return String
@@ -168,6 +170,32 @@ public class DVD extends Media {
                 + releasedDate + "'" + ", filmType='" + filmType + "'" + "}";
     }
 
+
+    @Override
+    public boolean addMedia() throws SQLException {
+        boolean addMediaSuccess = super.addMedia();
+
+        if (addMediaSuccess) {
+            Connection con = AIMSDB.getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                    "INSERT INTO DVD (id ,discType ,director, runtime, studio, subtitle, releasedDate,filmType) VALUES(?,?,?,?,?,?,?,?)");
+            ps.setInt(1, this.id);
+            ps.setString(2, this.discType);
+            ps.setString(3, this.director);
+            ps.setInt(4, this.runtime);
+            ps.setString(5, this.studio);
+            ps.setString(6, this.subtitles);
+            ps.setDate(7, new java.sql.Date(this.releasedDate.getTime()));
+            ps.setString(8, this.filmType);
+            int res = ps.executeUpdate();
+
+            if (res == 1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     /**
      * @param id
@@ -190,6 +218,8 @@ public class DVD extends Media {
             int price = res.getInt("price");
             String category = res.getString("category");
             int quantity = res.getInt("quantity");
+            int value = res.getInt("value");
+            String imageUrl = res.getString("imageUrl");
 
             // from DVD table
             String discType = res.getString("discType");
@@ -200,19 +230,45 @@ public class DVD extends Media {
             Date releasedDate = res.getDate("releasedDate");
             String filmType = res.getString("filmType");
 
-            return new DVD(id, title, category, price, quantity, type, discType, director, runtime, studio, subtitles, releasedDate, filmType);
+            return new DVD(id, title, category, price, quantity, type, value, imageUrl, discType, director, runtime,
+                    studio, subtitles, releasedDate, filmType);
 
         } else {
             throw new SQLException();
         }
     }
 
-
     /**
      * @return List
      */
     @Override
-    public List getAllMedia() {
-        return null;
+    public List getAllMedia() throws SQLException {
+        Statement stm = AIMSDB.getConnection().createStatement();
+        String sql = "SELECT Media.* FROM " +
+                "Media " +
+                "INNER JOIN DVD " +
+                "ON Media.id = DVD.id;";
+        ResultSet res = stm.executeQuery(sql);
+        ArrayList medium = new ArrayList<>();
+        while (res.next()) {
+            Media media = new Media(res.getInt("id"), res.getString("title"),
+                    res.getString("category"), res.getInt("price"),
+                    res.getInt("quantity"), res.getString("type"), res.getInt("value"), res.getString("imageUrl"));
+            medium.add(media);
+        }
+        return medium;
+    }
+
+    @Override
+    public boolean deleteMedia() throws SQLException {
+        PreparedStatement ps = AIMSDB.getConnection().prepareStatement(
+                "DELETE FROM DVD WHERE id = ?");
+        ps.setInt(1, this.id);
+        int res = ps.executeUpdate();
+        if (res == 1) {
+            return super.deleteMedia();
+        }
+
+        return false;
     }
 }

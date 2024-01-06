@@ -2,9 +2,10 @@ package entity.media;
 
 import entity.db.AIMSDB;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import entity.db.AIMSDB;
+
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,10 +23,23 @@ public class Book extends Media {
 
     }
 
-    public Book(int id, String title, String category, int price, int quantity, String type, String author,
-                String coverType, String publisher, Date publishDate, int numOfPages, String language,
-                String bookCategory) throws SQLException {
-        super(id, title, category, price, quantity, type);
+    public Book(int id, String title, String category, int price, int quantity, String type, int value, String imageUrl)
+            throws SQLException {
+        super(id, title, category, price, quantity, type, value, imageUrl);
+        this.publishDate = new Date();
+        this.author = "author";
+        this.coverType = "coverType";
+        this.publisher = "publisher";
+        this.numOfPages = 100;
+        this.language = "language";
+        this.bookCategory = "bookCategory";
+    }
+
+    public Book(int id, String title, String category, int price, int quantity, String type, int value, String imageUrl,
+            String author,
+            String coverType, String publisher, Date publishDate, int numOfPages, String language,
+            String bookCategory) throws SQLException {
+        super(id, title, category, price, quantity, type, value, imageUrl);
         this.author = author;
         this.coverType = coverType;
         this.publisher = publisher;
@@ -35,7 +49,6 @@ public class Book extends Media {
         this.bookCategory = bookCategory;
     }
 
-
     /**
      * @return int
      */
@@ -44,14 +57,12 @@ public class Book extends Media {
         return this.id;
     }
 
-
     /**
      * @return String
      */
     public String getAuthor() {
         return this.author;
     }
-
 
     /**
      * @param author
@@ -62,14 +73,12 @@ public class Book extends Media {
         return this;
     }
 
-
     /**
      * @return String
      */
     public String getCoverType() {
         return this.coverType;
     }
-
 
     /**
      * @param coverType
@@ -80,14 +89,12 @@ public class Book extends Media {
         return this;
     }
 
-
     /**
      * @return String
      */
     public String getPublisher() {
         return this.publisher;
     }
-
 
     /**
      * @param publisher
@@ -98,14 +105,12 @@ public class Book extends Media {
         return this;
     }
 
-
     /**
      * @return Date
      */
     public Date getPublishDate() {
         return this.publishDate;
     }
-
 
     /**
      * @param publishDate
@@ -116,14 +121,12 @@ public class Book extends Media {
         return this;
     }
 
-
     /**
      * @return int
      */
     public int getNumOfPages() {
         return this.numOfPages;
     }
-
 
     /**
      * @param numOfPages
@@ -134,14 +137,12 @@ public class Book extends Media {
         return this;
     }
 
-
     /**
      * @return String
      */
     public String getLanguage() {
         return this.language;
     }
-
 
     /**
      * @param language
@@ -152,14 +153,12 @@ public class Book extends Media {
         return this;
     }
 
-
     /**
      * @return String
      */
     public String getBookCategory() {
         return this.bookCategory;
     }
-
 
     /**
      * @param bookCategory
@@ -170,12 +169,32 @@ public class Book extends Media {
         return this;
     }
 
+    @Override
+    public boolean addMedia() throws SQLException {
+        boolean addMediaSuccess = super.addMedia();
 
-    /**
-     * @param id
-     * @return Media
-     * @throws SQLException
-     */
+        if (addMediaSuccess) {
+            Connection con = AIMSDB.getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                    "INSERT INTO Book (id ,author ,coverType, publisher, publishDate, numOfPages, language, bookCategory) VALUES(?,?,?,?,?,?,?,?)");
+            ps.setInt(1, this.id);
+            ps.setString(2, this.author);
+            ps.setString(3, this.coverType);
+            ps.setString(4, this.publisher);
+            ps.setDate(5, new java.sql.Date(this.publishDate.getTime()));
+            ps.setInt(6, this.numOfPages);
+            ps.setString(7, this.language);
+            ps.setString(8, this.bookCategory);
+            int res = ps.executeUpdate();
+
+            if (res == 1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     @Override
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM " +
@@ -193,6 +212,8 @@ public class Book extends Media {
             int price = res.getInt("price");
             String category = res.getString("category");
             int quantity = res.getInt("quantity");
+            int value = res.getInt("value");
+            String imageUrl = res.getString("imageUrl");
 
             // from Book table
             String author = res.getString("author");
@@ -203,14 +224,13 @@ public class Book extends Media {
             String language = res.getString("language");
             String bookCategory = res.getString("bookCategory");
 
-            return new Book(id, title, category, price, quantity, type,
+            return new Book(id, title, category, price, quantity, type, value, imageUrl,
                     author, coverType, publisher, publishDate, numOfPages, language, bookCategory);
 
         } else {
             throw new SQLException();
         }
     }
-
 
     /**
      * @return List
@@ -220,10 +240,6 @@ public class Book extends Media {
         return null;
     }
 
-
-    /**
-     * @return String
-     */
     @Override
     public String toString() {
         return "{" +
