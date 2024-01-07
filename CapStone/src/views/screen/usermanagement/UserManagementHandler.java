@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import utils.Configs;
 import views.screen.BaseScreenHandler;
+import views.screen.admin.AdminHomeHandler;
 import views.screen.home.HomeScreenHandler;
 
 import java.io.File;
@@ -64,12 +65,10 @@ public class UserManagementHandler extends BaseScreenHandler implements Initiali
             });
 
             backButton.setOnMouseClicked(e->{
-                HomeScreenHandler homeHandler = null;
                 try {
-                    homeHandler = new HomeScreenHandler(stage, Configs.HOME_PATH);
-                    homeHandler.setScreenTitle("Home Screen");
-                    homeHandler.setImage();
-                    homeHandler.show();
+                    AdminHomeHandler adminHome = new AdminHomeHandler(stage, Configs.ADMIN_HOME_PATH);
+                    adminHome.setScreenTitle("Admin");
+                    adminHome.show();
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }

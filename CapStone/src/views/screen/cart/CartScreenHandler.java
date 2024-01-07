@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import utils.Configs;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
+import views.screen.home.HomeScreenHandler;
 import views.screen.popup.PopupScreen;
 import views.screen.shipping.ShippingScreenHandler;
 
@@ -52,6 +53,9 @@ public class CartScreenHandler extends BaseScreenHandler {
     @FXML
     private Button btnPlaceOrder;
 
+    @FXML
+    private Button btnBack;
+
     //Control Coupling
     //Functional Cohesion
     public CartScreenHandler(Stage stage, String screenPath) throws IOException {
@@ -78,6 +82,18 @@ public class CartScreenHandler extends BaseScreenHandler {
                 throw new PlaceOrderException(Arrays.toString(exp.getStackTrace()).replaceAll(", ", "\n"));
             }
 
+        });
+
+        btnBack.setOnMouseClicked(e -> {
+            HomeScreenHandler homeHandler = null;
+            try {
+                homeHandler = new HomeScreenHandler(this.stage, Configs.HOME_PATH);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            homeHandler.setScreenTitle("Home Screen");
+            homeHandler.setImage();
+            homeHandler.show();
         });
     }
 

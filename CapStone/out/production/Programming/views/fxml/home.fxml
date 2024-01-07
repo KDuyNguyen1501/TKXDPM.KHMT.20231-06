@@ -63,7 +63,7 @@
 
                         <Pane prefHeight="102.0" prefWidth="174.0">
                             <children>
-                                <Button fx:id="showUser" layoutX="-128.0" layoutY="28.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="128.0" text="Show user" />
+                                <Button fx:id="btnAdmin" layoutX="-128.0" layoutY="28.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="128.0" text="admin" />
                                 <ImageView fx:id="cartImage" fitHeight="75.0" fitWidth="64.0" layoutX="14.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                                     <image>
                                         <Image url="@../../../../../../../../../../mnt/nguyenlm/DriveD/Documents/UNIVERSITY/PERSONAL/PROJECT/Java/TA-TKXDPM/AIMS/assets/images/cart.png" />

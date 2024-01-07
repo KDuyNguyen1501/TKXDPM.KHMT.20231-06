@@ -5,6 +5,7 @@ import controller.ViewCartController;
 import entity.cart.CartMedia;
 import entity.order.Order;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,6 +14,7 @@ import javafx.stage.Stage;
 import utils.Configs;
 import views.screen.BaseScreenHandler;
 import views.screen.cart.MediaHandler;
+import views.screen.home.HomeScreenHandler;
 import views.screen.payment.ResultScreenHandler;
 
 import java.io.File;
@@ -30,6 +32,9 @@ public class OrderScreenHandler extends BaseScreenHandler {
     @FXML
     private VBox vboxOrder;
 
+    @FXML
+    private Button btnBack;
+
     public OrderScreenHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
         File file = new File("assets/images/Logo.png");
@@ -38,6 +43,18 @@ public class OrderScreenHandler extends BaseScreenHandler {
 
         aimsImage.setOnMouseClicked(e -> {
             homeScreenHandler.show();
+        });
+
+        btnBack.setOnMouseClicked(e -> {
+            HomeScreenHandler homeHandler = null;
+            try {
+                homeHandler = new HomeScreenHandler(this.stage, Configs.HOME_PATH);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            homeHandler.setScreenTitle("Home Screen");
+            homeHandler.setImage();
+            homeHandler.show();
         });
     }
     public OrderController getBController() {

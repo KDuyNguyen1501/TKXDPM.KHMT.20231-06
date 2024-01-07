@@ -5,6 +5,7 @@ import controller.PaymentController;
 import entity.invoice.Invoice;
 import entity.order.OrderMedia;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -13,6 +14,7 @@ import javafx.stage.Stage;
 import utils.Configs;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
+import views.screen.home.HomeScreenHandler;
 import views.screen.payment.PaymentScreenHandler;
 
 import java.io.IOException;
@@ -54,6 +56,9 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
     @FXML
     private VBox vboxItems;
 
+    @FXML
+    private Button okButton;
+
     private Invoice invoice;
 
     //Data coupling
@@ -88,7 +93,17 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
             }
 
         });
-
+        okButton.setOnMouseClicked(e -> {
+            HomeScreenHandler homeHandler = null;
+            try {
+                homeHandler = new HomeScreenHandler(this.stage, Configs.HOME_PATH);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            homeHandler.setScreenTitle("Home Screen");
+            homeHandler.setImage();
+            homeHandler.show();
+        });
     }
 
 

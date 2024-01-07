@@ -9,6 +9,7 @@ import utils.Configs;
 import views.screen.BaseScreenHandler;
 import views.screen.admin.manage_media.ManageMediaHandler;
 import views.screen.home.HomeScreenHandler;
+import views.screen.usermanagement.UserManagementHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -60,7 +61,15 @@ public class AdminHomeHandler extends BaseScreenHandler {
         });
 
         userBtn.setOnMouseClicked(e -> {
-            System.out.println("go to user manage");
+            UserManagementHandler userManagementHandler;
+            try {
+                userManagementHandler = new UserManagementHandler(stage, Configs.USER_MANAGEMENT_PATH);
+                userManagementHandler.setScreenTitle("All user");
+                accountController = userManagementHandler.getBController();
+                userManagementHandler.show();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         });
 
     }

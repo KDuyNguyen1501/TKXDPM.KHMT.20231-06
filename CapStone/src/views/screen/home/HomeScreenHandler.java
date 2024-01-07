@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import utils.Configs;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
+import views.screen.admin.AdminHomeHandler;
 import views.screen.cart.CartScreenHandler;
 import views.screen.login.LoginScreenHandler;
 import views.screen.order.OrderScreenHandler;
@@ -51,7 +52,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     private Button orderBtn;
 
     @FXML
-    private Button showUser;
+    private Button btnAdmin;
 
     @FXML
     private ImageView aimsImage;
@@ -103,10 +104,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
             if (accountController.getLoggedInAccount() != null) {
                 System.out.println(accountController.getLoggedInAccount().getRole());
                 if (accountController.getLoggedInAccount().getRole() == 0) {
-                    showUser.setVisible(true);
+                    btnAdmin.setVisible(true);
                     var x = getAllAccounts();
                 }else{
-                    showUser.setVisible(false);
+                    btnAdmin.setVisible(false);
                 }
                 login.setText("Chào mừng, " + accountController.getLoggedInAccount().getName());
             }
@@ -142,33 +143,21 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
             e.printStackTrace();
         }
 
-        showUser.setOnMouseClicked(e -> {
-            UserManagementHandler userManagementHandler;
+//        btnAdmin.setOnMouseClicked(e -> {
+//
+//        });
+        btnAdmin.setOnMouseClicked(e -> {
             try {
-                userManagementHandler = new UserManagementHandler(stage, Configs.USER_MANAGEMENT_PATH);
-                userManagementHandler.setHomeScreenHandler(this);
-                userManagementHandler.setScreenTitle("All user");
-                accountController = userManagementHandler.getBController();
-                userManagementHandler.show();
+                AdminHomeHandler adminHome = new AdminHomeHandler(stage, Configs.ADMIN_HOME_PATH);
+                adminHome.setScreenTitle("Admin");
+                adminHome.show();
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         });
 
-        // showUser.setOnMouseClicked(e -> {
-        // LoginScreenHandler loginHandler;
-        // try {
-        // loginHandler = new LoginScreenHandler(stage, Configs.USER_MANAGEMENT_PATH);
-        // loginHandler.setHomeScreenHandler(this);
-        // loginHandler.setScreenTitle("Login");
-        // accountController = loginHandler.getBController();
-        // loginHandler.show();
-        // } catch (IOException e1) {
-        // e1.printStackTrace();
-        // }
-        // });
 
-        showUser.setVisible(false);
+        btnAdmin.setVisible(false);
 
         login.setOnMouseClicked(e -> {
             LoginScreenHandler loginHandler;
