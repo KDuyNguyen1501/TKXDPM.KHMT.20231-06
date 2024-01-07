@@ -236,8 +236,21 @@ public class Book extends Media {
      * @return List
      */
     @Override
-    public List getAllMedia() {
-        return null;
+    public List getAllMedia() throws SQLException {
+        Statement stm = AIMSDB.getConnection().createStatement();
+        String sql = "SELECT Media.* FROM " +
+                "Media " +
+                "INNER JOIN Book " +
+                "ON Media.id = Book.id;";
+        ResultSet res = stm.executeQuery(sql);
+        ArrayList medium = new ArrayList<>();
+        while (res.next()) {
+            Media media = new Media(res.getInt("id"), res.getString("title"),
+                    res.getString("category"), res.getInt("price"),
+                    res.getInt("quantity"), res.getString("type"), res.getInt("value"), res.getString("imageUrl"));
+            medium.add(media);
+        }
+        return medium;
     }
 
     @Override

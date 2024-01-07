@@ -41,7 +41,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="signup" layoutX="48.0" layoutY="252.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="266.0" style="-fx-font-weight: bold; -fx-background-color: #5091e6;" text="Sign In" textFill="WHITE">
+            <Button fx:id="signup" layoutX="48.0" layoutY="252.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="266.0" style="-fx-font-weight: bold; -fx-background-color: #5091e6;" text="Sign Up" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
