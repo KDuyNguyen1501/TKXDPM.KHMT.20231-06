@@ -101,9 +101,12 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     public void show() {
         try {
             if (accountController.getLoggedInAccount() != null) {
+                System.out.println(accountController.getLoggedInAccount().getRole());
                 if (accountController.getLoggedInAccount().getRole() == 0) {
                     showUser.setVisible(true);
                     var x = getAllAccounts();
+                }else{
+                    showUser.setVisible(false);
                 }
                 login.setText("Chào mừng, " + accountController.getLoggedInAccount().getName());
             }
