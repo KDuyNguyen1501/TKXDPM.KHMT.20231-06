@@ -1,5 +1,6 @@
 package views.screen.usermanagement;
 
+import common.exception.LoginFailedException;
 import common.exception.SignupFailedException;
 import controller.AccountController;
 import controller.UserManagementController;
@@ -22,6 +23,7 @@ import utils.Configs;
 import views.screen.BaseScreenHandler;
 import views.screen.admin.AdminHomeHandler;
 import views.screen.home.HomeScreenHandler;
+import views.screen.popup.PopupScreen;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +31,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
 
 public class UserManagementHandler extends BaseScreenHandler implements Initializable {
     ObservableList<String> roles;
@@ -140,20 +143,26 @@ public class UserManagementHandler extends BaseScreenHandler implements Initiali
             addBtn.setOnMouseClicked(e -> {
                 if (isEmpty(nameField) || isEmpty(usernameField) || isEmpty(passwordField) ||
                         isEmpty(birthDateField) || isEmpty(phoneField) || isEmpty(roleField)) {
-                    throw new SignupFailedException("Yêu cầu đủ các trường");
-
-                } else {
-                    UserManagementController.createAcc(new Account(0,
-                            nameField.getText(),
-                            usernameField.getText(),
-                            passwordField.getText(),
-                            birthDateField.getText(),
-                            phoneField.getText(),
-                            Integer.valueOf(roleField.getText())));
                     try {
-                        accountList.setAll(UserManagementController.getAllAccounts());
-                    } catch (SQLException ex) {
+                        PopupScreen.error("Yêu cầu đủ các trường!");
+                    } catch (IOException ex) {
                         throw new RuntimeException(ex);
+                    }
+                    throw new SignupFailedException("Yêu cầu đủ các trường");
+                } else {
+                    if (UserManagementController.validateLoginInformation(passwordField.getText())) {
+                        UserManagementController.createAcc(new Account(0,
+                                nameField.getText(),
+                                usernameField.getText(),
+                                passwordField.getText(),
+                                birthDateField.getText(),
+                                phoneField.getText(),
+                                Integer.valueOf(roleField.getText())));
+                        try {
+                            accountList.setAll(UserManagementController.getAllAccounts());
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                 }
             });
@@ -161,19 +170,26 @@ public class UserManagementHandler extends BaseScreenHandler implements Initiali
             editBtn.setOnMouseClicked(e -> {
                 if (isEmpty(nameField) || isEmpty(usernameField) || isEmpty(passwordField) ||
                         isEmpty(birthDateField) || isEmpty(phoneField) || isEmpty(roleField)) {
+                    try {
+                        PopupScreen.error("Yêu cầu đủ các trường!");
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     throw new SignupFailedException("Yêu cầu đủ các trường");
                 } else {
-                    UserManagementController.updateAcc(new Account(idSeclect,
-                            nameField.getText(),
-                            usernameField.getText(),
-                            passwordField.getText(),
-                            birthDateField.getText(),
-                            phoneField.getText(),
-                            Integer.valueOf(roleField.getText())));
-                    try {
-                        accountList.setAll(UserManagementController.getAllAccounts());
-                    } catch (SQLException ex) {
-                        throw new RuntimeException(ex);
+                    if (UserManagementController.validateLoginInformation(passwordField.getText())) {
+                        UserManagementController.updateAcc(new Account(idSeclect,
+                                nameField.getText(),
+                                usernameField.getText(),
+                                passwordField.getText(),
+                                birthDateField.getText(),
+                                phoneField.getText(),
+                                Integer.valueOf(roleField.getText())));
+                        try {
+                            accountList.setAll(UserManagementController.getAllAccounts());
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                 }
             });
