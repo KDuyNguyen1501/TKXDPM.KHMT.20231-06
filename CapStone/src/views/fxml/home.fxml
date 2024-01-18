@@ -66,7 +66,7 @@
                                 <Button fx:id="btnAdmin" layoutX="-128.0" layoutY="28.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="128.0" text="admin" />
                                 <ImageView fx:id="cartImage" fitHeight="75.0" fitWidth="64.0" layoutX="14.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                                     <image>
-                                        <Image url="@../../../../../../../../../../mnt/nguyenlm/DriveD/Documents/UNIVERSITY/PERSONAL/PROJECT/Java/TA-TKXDPM/AIMS/assets/images/cart.png" />
+                                        <Image url="@../../../assets/images/cart.png" />
                                     </image>
                                 </ImageView>
                                 <Label fx:id="numMediaInCart" layoutX="24.0" layoutY="11.0" prefHeight="16.0" prefWidth="64.0" text="0 media" textFill="#5091e6" />
@@ -86,5 +86,10 @@
                 <VBox prefHeight="629.0" prefWidth="320.0" style="-fx-border-color: #33adff;" />
             </children>
         </HBox>
+        <Label fx:id="label" text=" " AnchorPane.rightAnchor="2.0" AnchorPane.bottomAnchor="2.0">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
     </children>
 </AnchorPane>

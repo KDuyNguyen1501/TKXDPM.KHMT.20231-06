@@ -55,45 +55,25 @@ public class Account {
      * @return String
      */
     // getter and setter
+    public int getId(){return this.id;};
     public String getName() {
         return this.name;
     }
+    public String getUsername() { return this.username;}
+    public String getPassword() { return this.password;}
+    public String getBirthDate() { return this.birthDate;}
+    public int getRole(){
+        return role;
+    }
 
-
-    /**
-     * @param name
-     */
     public void setusername(String name) {
         this.name = name;
     }
 
-    /**
-     * @return String
-     */
-    public String getBirthdate() {
-        return this.birthDate;
-    }
-
-
-    /**
-     * @param address
-     */
-    public void setBirthdate(String birthDate) {
-        this.birthDate = birthDate;
-    }
-
-
-    /**
-     * @return String
-     */
     public String getPhone() {
         return this.phone;
     }
 
-
-    /**
-     * @param phone
-     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
@@ -113,9 +93,6 @@ public class Account {
         }
     }
 
-    public int getRole(){
-        return role;
-    }
 
     public boolean validateLoginInformation() {
         Matcher matcher = pattern.matcher(password);
@@ -165,32 +142,6 @@ public class Account {
         {
             throw new LoginFailedException("Không tồn tại tài khoản");
         }
-    }
-
-    public static List<Account> getAllAccounts() throws SQLException {
-        List<Account> accountList = new ArrayList<>();
-        System.out.println("///////");
-
-        String sql = "SELECT * FROM User;";
-        try (Statement stm = AIMSDB.getConnection().createStatement();
-             ResultSet res = stm.executeQuery(sql)) {
-
-            while (res.next()) {
-                Account account = new Account(res.getInt("id"), res.getString("name"), res.getString("username"),
-                        res.getString("password"), res.getString("birthdate"), res.getString("phoneNumber"), res.getInt("role"));
-                System.out.println(account);
-                System.out.println(res.getString("name"));
-
-                accountList.add(account);
-            }
-        }
-
-        if (accountList.isEmpty()) {
-            throw new LoginFailedException("Không tồn tại tài khoản");
-        }
-        System.out.println("///////");
-
-        return accountList;
     }
 
     public Account signup() throws SQLException {
@@ -255,4 +206,5 @@ public class Account {
             throw new RuntimeException(e);
         }
     }
+
 }

@@ -36,8 +36,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-import static entity.user.Account.getAllAccounts;
-
 public class HomeScreenHandler extends BaseScreenHandler implements Initializable {
 
     public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());
@@ -75,6 +73,9 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     @FXML
     private SplitMenuButton splitMenuBtnSearch;
 
+    @FXML
+    private Label label;
+
     private List homeItems;
 
     public HomeScreenHandler(Stage stage, String screenPath) throws IOException {
@@ -105,11 +106,11 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
                 System.out.println(accountController.getLoggedInAccount().getRole());
                 if (accountController.getLoggedInAccount().getRole() == 0) {
                     btnAdmin.setVisible(true);
-                    var x = getAllAccounts();
                 }else{
                     btnAdmin.setVisible(false);
                 }
-                login.setText("Chào mừng, " + accountController.getLoggedInAccount().getName());
+                login.setText("Logout");
+                label.setText("Hello " + accountController.getLoggedInAccount().getName());
             }
         } catch (Exception e) {
             System.out.println("null");
